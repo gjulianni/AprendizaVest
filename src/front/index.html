@@ -14,7 +14,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
- 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+<script src="./js/misc/scroll-to-top.js"></script>
+<script src="./js/misc/smooth-scroll.js"></script>
+<script src="./js/auth/geral.js"></script>
+<script src="./js/auth/login.js"></script>
+<script src="./js/auth/cadastro.js"></script>
+<script src="../backend/servidor/src/controladores/usuario.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +42,8 @@
 </style>
 
 <body>
+    
+    </script>
 
         <nav>
 
@@ -49,20 +59,21 @@
             <li><a href="#">Certificados</a></li>
         </ul>
 
-        <button class="btn-logon">Login</button>
+        <a href="./login.html"><button class="btn-logon">Login</button></a>
+        <button class="btn-logout" onclick="logout()">Sair</button>
     </nav>
     <div class="sub-topnav">
-        <a href="#">Língua Portuguesa</a>
-        <a href="#">Matemática</a>
-        <a href="#">Física</a>
-        <a href="#">Química</a>
+        <a href="#lpsec" class="smooth-scroll">Língua Portuguesa</a>
+        <a href="#matsec" class="smooth-scroll">Matemática</a>
+        <a href="#fisicasec" class="smooth-scroll">Física</a>
+        <a href="#quimicasec" class="smooth-scroll">Química</a>
         <a href="#">Biologia</a>
         <a href="#">Geografia</a>
         <a href="#">História</a>
     </div>
     <section class="home-banner">
         <div class="home-texts">
-            <p>Sua plataforma para se preparar para o <b>vestibular</b></p>
+            
         <h1>Transforme seu futuro com conhecimento</h1>
         <p id="texto">Bem-vindo ao AprendizaVest! Aqui você encontra conteúdos de alta qualidade para todas as matérias escolares. 
         Aproveite nossos recursos para melhorar seus estudos e alcançar seus objetivos. 
@@ -78,5 +89,75 @@
     </div>
         <img class="home-gif" src="./images/index/Formula.gif">
     </section>
+    <section class="materia-lp" id="lpsec">
+       
+        <div class="lp-textsection">
+            <h1>Domine a Gramática de forma descomplicada</h1>
+            <p>Explore a estrutura da língua portuguesa com explicações claras e exemplos práticos.</p>
+            <button class="btn-lp">Acessar conteúdo</button>
+            <button class="btn-lp2">Avaliações</button>
+        </div>
+        <div class="lp-svgsection">
+            <img class="lpstudy" src="./images/index/lpstudy.svg" style="width: 500px; height: 415px;">
+        </div>
+    </section>
+    <section class="materia-mat" id="matsec">
+        <div class="lp-textsection">
+            <h1>Matemática na prática</h1>
+            <p>Entenda os fundamentos da matemática e resolva problemas complexos com exemplos detalhados e passo a passo.</p>
+            <button class="btn-mat">Acessar conteúdo</button>
+            <button class="btn-mat2">Avaliações</button>
+        </div>
+        <div class="lp-svgsection">
+            <img class="lpmat" src="./images/index/math.svg" style="width: 450; height: 345px;">
+        </div>
+    </section>
+    <section class="materia-fisica" id="fisicasec">
+        <div class="lp-textsection">
+            <h1>Física</h1>
+            <p>Compreenda os princípios físicos que regem o universo com explicações detalhadas e exemplos práticos.</p>
+            <button class="btn-fis">Acessar conteúdo</button>
+            <button class="btn-fis2">Avaliações</button>
+        </div>
+        <div class="lp-svgsection">
+            <img class="lpmat" src="./images/index/physics.svg" style="width: 500; height: 395px;">
+        </div>
+    </section>
+    <section class="materia-quimica" id="quimicasec">
+        <div class="lp-textsection">
+            <h1>Química</h1>
+            <p>Explore os elementos que compõem o mundo ao nosso redor nas aulas de Química. Desde as reações químicas simples até os conceitos avançados de bioquímica e físico-química, mergulhe em um universo de descobertas científicas.</p>
+            <button class="btn-mat">Acessar conteúdo</button>
+            <button class="btn-mat2">Avaliações</button>
+        </div>
+        <div class="lp-svgsection">
+            <img class="lpmat" src="./images/index/chemistry.svg" style="width: 500; height: 395px;">
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>&copy;2024 AprendizaVest. Todos os direitos reservados.</p>
+    </div>
+
+    <div id="scrollToTopBtn" class="scroll-to-top-btn" onclick="scrollToTop()">
+        <span>&uarr;</span>
+
+        <p>↑</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          if (isUserLoggedIn()) {
+            console.log("Usuário está logado");
+            const btnLogout = document.getElementsByClassName('btn-logout')[0];
+            btnLogout.style.display = "flex";
+          
+            const btnLogin = document.getElementsByClassName('btn-logon')[0];
+            btnLogin.style.display = 'none';
+          } else {
+            console.log("Usuário não está logado");
+          }
+        });
+      </script>
 </body>
 </html>

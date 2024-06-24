@@ -2,7 +2,51 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    overflow-x: hidden;
   }
+
+  .scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f104d2;
+    color: rgb(94, 8, 233);
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+}
+
+.scroll-to-top-btn p{
+
+    
+    color: #fff;
+    align-items: center;
+
+}
+
+.scroll-to-top-btn span {
+
+  color: #fff;
+  font-size: 230%;
+}
+
+.scroll-to-top-btn.show {
+    display: block;
+}
+
+.footer {
+
+  background:rgb(33, 135, 218);
+  padding: 10px;
+  color: #fff;
+  font-weight: 500;
+  text-align: center;
+}
+
   
   nav {
     background-color: #3498DB;
@@ -87,9 +131,38 @@ ul li:hover::after{
     transition: 0.5s;
     position: absolute;
     right: 0;
+    top: 0;
+    margin-top: 15px;
     margin-right: 20px;
   }
 
+  .btn-logout {
+
+    background: rgb(243, 98, 98);
+    border-radius: 20px;
+    padding: 15px 25px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
+    border: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 15px;
+    margin-right: 20px;
+    display: none;
+  }
+
+  .btn-logout:hover {
+
+    background: rgb(92, 1, 1);
+  }
+
+  
   .btn-logon:hover {
     background: black;
     color: white;
@@ -203,26 +276,34 @@ ul li:hover::after{
     height: 35vh;
     display: flex;
     overflow: hidden; /* Garante que o conteúdo excedente não ultrapasse a seção */
-    padding: 30px; 
+    padding: 35px; 
     
   }
 
   .home-texts {
 
+    background: #1d73ad;
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 40%;
     margin-left: 30px;
+    padding: 35px;
+    border-radius: 20px;
   }
 
+
   .home-banner h1 {
-    margin: 0 0 10px 0;
+    margin: 0 0 30px 0;
     font-size: 2rem;
+    color: #fff;
 }
 
 .home-banner #texto {
     margin: 0 0 20px 0; 
     font-size: 1.2rem;
+    background: #fff;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .home-gif {
@@ -266,7 +347,14 @@ ul li:hover::after{
 
 .search-btn:hover {
 
-    background: #1d73ad;
+    background: #081e2c;
+}
+
+@media only screen and (max-width: 1024px) and (max-height: 600px) {
+  .home-banner {
+
+    height: 80vh;
+  }
 }
 
 @media (max-width: 945px) {
@@ -275,6 +363,8 @@ ul li:hover::after{
         margin: 0 0 20px 0; 
         font-size: 1rem;
     }
+
+   
 }
 
 @media (max-width: 790px) {
@@ -319,5 +409,351 @@ ul li:hover::after{
     }
 }
 
+.materia-lp {
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ccb0dd;
+    height: 45vh;
+    padding: 35px; 
+    
+  }
 
+  .lpstudy {
+    max-width: 100%; 
+    max-height: 100%; 
+    height: auto;
+    object-fit: contain; 
+    
+}
+
+  .lp-svgsection {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+  .lp-textsection {
+
+  color: black;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: center; 
+  padding: 15px;
+  max-width: 30%;
+  background: #fff;
+  margin-left: 15%;
+  border-radius: 20px;
+  box-shadow: 4.7px 9.4px 9.4px hsl(0deg 0% 0% / 0.35);
+  font-family: 'Source Sans Pro', sans-serif;
+
+  }
+
+  .lp-textsection > h1 {
+
+    font-size: 2rem;
+  }
+
+  .lp-textsection > p {
+
+    font-size: 1.2rem;
+  }
+  
+  .btn-lp {
+
+    padding: 15px 20px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 15px;
+    border: none;
+    background: #bc5ff7;
+    cursor: pointer;
+    transition: .3s;
+  }
+
+  .btn-lp:hover {
+
+    background: #960aec;
+  }
+
+  .btn-lp2 {
+
+    padding: 15px 50px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 15px;
+    border: none;
+    background: #06a7e7;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: .3s;
+  }
+  
+  .btn-lp2:hover {
+    background: #045f83;
+   
+  }
+
+  @media (max-width: 1336px) {
+
+    .lp-textsection > h1 {
+
+      font-size: 1.5rem;
+    }
+
+    .lp-textsection > p {
+
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 715px) {
+
+    .materia-lp {
+
+      flex-direction: column;
+      height: 80vh;
+    }
+
+    .lp-textsection {
+
+      max-width: 95%;
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 405px) {
+
+    .lp-textsection > h1 {
+
+      font-size: 1.3rem;
+    }
+
+    .lp-textsection > p {
+
+      font-size: 1rem;
+    }
+
+    
+
+  }
+
+  .materia-mat {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #282A35;
+    height: 45vh;
+    padding: 35px; 
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  .lpmat {
+
+    max-width: 80%; 
+    max-height: 80%; 
+    height: auto;
+    object-fit: contain; 
+  }
+
+  .btn-mat {
+
+    padding: 15px 20px;
+    color: black;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    border: none;
+    background: rgb(247, 219, 12);
+    transition: .3s;
+    cursor: pointer;
+    margin-top: 10px;
+
+  }
+
+  .btn-mat:hover {
+
+    background: rgb(218, 207, 123);
+  }
+
+  .btn-mat2 {
+
+    padding: 15px 50px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    border: none;
+    background: rgb(4, 170, 109);
+    cursor: pointer;
+    margin-top: 10px;
+    transition: .3s;
+  }
+
+  .btn-mat2:hover {
+
+    background: rgb(2, 116, 74);
+  }
+
+  @media (max-width: 715px) {
+
+    .materia-mat {
+
+      flex-direction: column;
+      height: 80vh;
+    }
+  }
+
+  @media (max-width: 375px) and (max-height: 667px) {
+
+    .materia-lp {
+
+      height: 100vh;
+    }
+
+    .btn-lp, .btn-lp2, .btn-mat, .btn-mat2 {
+
+      padding: 10px 20px;
+    }
+
+    .home-texts > h1 {
+      font-size: 1.5rem;
+    }
+
+    .home-texts #texto {
+
+      font-size: 0.9rem;
+    }
+
+    .home-texts {
+
+      padding: 25px;
+    }
+
+    .materia-mat {
+
+      height: 100vh;
+    }
+  }
+
+  .materia-fisica {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #aaf0ad;
+    height: 45vh;
+    padding: 35px; 
+  }
+
+  @media (max-width: 715px) {
+
+    .materia-fisica {
+
+      flex-direction: column;
+      height: 90vh;
+    }
+  }
+
+  @media (max-width: 367px) {
+
+    .lp-textsection {
+
+      margin-top: 12%;
+    }
+  }
+
+  .materia-quimica {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #b692f0;
+    height: 45vh;
+    padding: 35px; 
+  }
+
+  .btn-fis {
+
+    padding: 15px 20px;
+    color: black;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    border: none;
+    background: rgb(161, 209, 248);
+    transition: .3s;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .btn-fis:hover {
+
+    background: rgb(33, 135, 218);
+  }
+
+  .btn-fis2 {
+
+    padding: 15px 50px;
+    color: black;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    border: none;
+    background: rgb(247, 204, 140);
+    transition: .3s;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .btn-fis2:hover {
+
+    background: rgb(211, 151, 61);
+  }
+
+  @media (max-width: 715px) {
+
+    .materia-quimica {
+
+      flex-direction: column;
+      height: 100vh;
+    }
+  }
+
+  @media (max-height: 700px) {
+
+    .materia-fisica {
+
+      height: 110vh;
+    }
+
+    .materia-quimica {
+
+      height: 110vh;
+    }
+  }
+
+  @media (max-height: 800px) {
+
+    .materia-lp {
+
+      height: 80vh;
+    }
+
+    .materia-mat {
+
+      height: 80vh;
+    }
+  }
