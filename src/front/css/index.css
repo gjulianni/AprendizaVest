@@ -1,0 +1,323 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  nav {
+    background-color: #3498DB;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 23px 25px;
+    margin: 0;
+
+  }
+  
+  .logo {
+    font-size: 3rem;
+    font-family: 'Oleo Script Swash Caps', sans-serif;
+    position: absolute;
+    left: 0;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  
+  ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  ul li {
+    margin-right: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    position: relative;
+  }
+  
+  ul li a {
+    color: white;
+    text-decoration: none;
+  }
+
+  ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    transition: 0.4s;
+}
+  
+ul li:hover::after{
+
+    width: 100%;
+}
+  
+  .checkbtn {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    display: none;
+  }
+  
+  #check {
+    display: none;
+  }
+
+  .btn-logon {
+
+    background: white;
+    border-radius: 20px;
+    padding: 15px 25px;
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
+    border: none;
+    transition: 0.5s;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+  }
+
+  .btn-logon:hover {
+    background: black;
+    color: white;
+  }
+  
+  @media (max-width: 1200px) {
+
+    nav {
+
+        justify-content: end;
+        
+    }
+
+    ul {
+        margin-right: 10%;
+    }
+  }
+  @media (max-width: 990px) {
+    .checkbtn {
+      display: block;
+      order: 1;
+      margin-right: 20px;
+    }
+
+    .btn-logon {
+
+        margin-right: 90px;
+    }
+  
+    ul {
+      position: fixed;
+      top: 80px;
+      right: -100%;
+      background-color: #1e89cf;
+      width: 40%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s;
+      margin-right: 0;
+    }
+  
+    ul li {
+      margin: 40px 0;
+    }
+  
+    ul li a {
+      font-size: 20px;
+    }
+  
+    #check:checked ~ ul {
+      right: 0;
+    }
+  }
+
+  @media (max-width: 500px) {
+
+    .logo {
+        font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 390px) {
+
+    .logo {
+        font-size: 1.8rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+
+    .logo {
+        font-size: 1.5rem;
+    }
+  }
+
+  .sub-topnav {
+
+    background: #282A35;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow-x: auto;
+    justify-content: space-around;
+    
+  }
+
+  .sub-topnav > a {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px ; /* Adicione padding para espaçamento entre os links */ /* Espaçamento entre os links */
+    white-space: nowrap; 
+    cursor: pointer;
+    
+  }
+
+  .sub-topnav > a:hover {
+
+    background: #17181f;
+  }
+
+  .home-banner {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #93b8c0;
+    height: 35vh;
+    display: flex;
+    overflow: hidden; /* Garante que o conteúdo excedente não ultrapasse a seção */
+    padding: 30px; 
+    
+  }
+
+  .home-texts {
+
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 30px;
+  }
+
+  .home-banner h1 {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+}
+
+.home-banner #texto {
+    margin: 0 0 20px 0; 
+    font-size: 1.2rem;
+}
+
+.home-gif {
+    max-width: 100%; /* Garante que o GIF não ultrapasse a largura da seção */
+    max-height: 100%; /* Garante que o GIF não ultrapasse a altura da seção */
+    height: auto; /* Mantém a proporção do GIF */
+    object-fit: contain; /* Garante que o GIF se ajuste dentro da seção sem distorção */
+     /* Centraliza o GIF horizontalmente */
+}
+
+.search-div {
+
+   display: flex;
+    
+    
+}
+.search-content {
+
+    padding: 15px 15px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    text-align: start;
+    font-size: 1.1rem;
+    width: 60%;
+}
+
+.search-btn {
+
+    font-size: 1rem;
+    background: #3498DB;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    margin-left: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: .3s;
+    padding: 15px;
+}
+
+.search-btn:hover {
+
+    background: #1d73ad;
+}
+
+@media (max-width: 945px) {
+
+    .home-banner #texto {
+        margin: 0 0 20px 0; 
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 790px) {
+
+    .home-banner {
+
+        flex-direction: column;
+        height: 70vh;
+
+    }
+
+    .home-texts {
+
+        width: 100%;
+        margin: 0;
+
+    }
+
+    .search-content {
+
+        font-size: 1rem;
+        padding: 20px;
+    }
+
+    .home-gif {
+
+        max-width: 85%;
+        max-height: 85%;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .home-gif {
+
+        max-width: 80%;
+        max-height: 80%;
+    }
+
+    .home-banner {
+        height: 80vh;
+    }
+}
+
+
+
