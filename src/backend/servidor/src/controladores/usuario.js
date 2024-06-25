@@ -3,15 +3,17 @@ const { pool } = require("./bd.js");
 async function cadastrarUsuario(req, res) {
   // Desestrutura as propriedades mail e nome
   // do objeto JSON que está no body da requisição HTTTP
-  const { mail, nome } = req.body;
+  const { mail, nome, senha } = req.body;
   if (!mail || mail.length == 0) {
     return res.json({ erro: "Forneça o e-mail." });
   } else if (!nome || nome.length == 0) {
     return res.json({ erro: "Forneça o nome." });
+  } else if (!senha || senha.length == 0){
+    return res.json({erro: "Forneça a senha."});
   } else {
     // Antes de criar um novo usuário, vamos ver se o e-mail já existe
     let resposta = await pool.query(
-      "SELECT idusuario,mail,nome FROM tbusuario WHERE mail=$1 LIMIT 1",
+      "SELECT idusuario,mail,nome,senha FROM tbusuario WHERE mail=$1 LIMIT 1",
       [mail]
     );
     // Verifica se o usuário existe na tbusuario
@@ -21,11 +23,13 @@ async function cadastrarUsuario(req, res) {
     } else {
       // Insere um registro na tbusuario
       resposta = await pool.query(
-        "INSERT INTO tbusuario(mail,nome) VALUES ($1,$2) RETURNING idusuario, mail, nome",
-        [mail, nome]
+        "INSERT INTO tbusuario(mail,nome,senha) VALUES ($1,$2,$3) RETURNING idusuario, mail, nome, senha",
+        [mail, nome, senha]
       );
       // Retorna o registro inserido no formato JSON
-      return res.json(resposta.rows[0]);
+      let novoUsuario = resposta.rows[0];
+      novoUsuario.session = true;
+      return res.json(novoUsuario);
     }
   }
 }
@@ -50,6 +54,7 @@ async function login(req, res) {
       usuario.session = true;
       // Retorna o registro no formato JSON
       return res.json(usuario);
+      // Retorna o registro no formato JSON
     } else {
       return res.json({ erro: "E-mail ou senha incorretos." });
     }

@@ -1,13 +1,16 @@
 function salvarUsuario() {
   const mail = document.getElementById("mail").value.trim();
   const nome = document.getElementById("nome").value.trim();
+  const senha = document.getElementById("senha").value.trim();
 
   if (!mail || mail.length == 0) {
     alert("Forneça o e-mail");
   } else if (!nome || nome.length == 0) {
     alert("Forneça o nome");
+  } else  if (!senha || senha.length == 0){
+    alert("Forneça a senha");
   } else {
-    const usuario = { mail, nome };
+    const usuario = { mail, nome, senha };
 
     // Configuração da requisição
     const url = `${urlbase}/usuario`;
@@ -30,8 +33,9 @@ function salvarUsuario() {
       })
       .then((data) => {
         if (data.idusuario) {
+          data.session = true;
           salvarLogin(data);
-          window.location.href = "./login.html";
+          window.location.href = "../front/index.html";
         }
         else{
           alert(data.erro);
@@ -45,6 +49,7 @@ function salvarUsuario() {
 
 // Salvar dados de login
 function salvarLogin(objeto) {
+  objeto.session = true;
   // JSON.stringify() é usado para converter de objeto JS em string JSON
   localStorage.setItem("usuario", JSON.stringify(objeto));
 }

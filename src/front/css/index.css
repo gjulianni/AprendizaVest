@@ -241,6 +241,88 @@ ul li:hover::after{
     }
   }
 
+  .logout-container {
+
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Z-index alto para garantir que a caixa de diálogo esteja na frente de todo o conteúdo */
+    transition: opacity 0.3s ease;
+  }
+
+  .logout-box {
+
+    border: 1px solid #a3a3a3;
+    width: 500px; /* Aumenta a largura da caixa */
+    padding: 100px; /* Ajusta o padding para dar mais espaço interno */
+    background-color: #d3d3d3; /* Cor de fundo cinza claro */
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6); /* Sombra para dar destaque */
+    animation: expandFromCenter 0.6s forwards ease-out;
+    transform: scale(0.1); /* Inicia pequeno */
+    opacity: 0; /* Inicia invisível */
+  }
+
+  @keyframes expandFromCenter {
+    0% {
+      transform: scale(0.1); /* Começa pequeno */
+      opacity: 0; /* Inicia invisível */
+    }
+    70% {
+      transform: scale(1.2); /* Cresce um pouco mais que o tamanho normal */
+      opacity: 1; /* Torna-se visível */
+    }
+    100% {
+      transform: scale(1); /* Tamanho normal */
+      opacity: 1; /* Visível totalmente */
+    }
+  }
+
+  .logout-box > h1 {
+
+    margin-bottom: 40px;
+    font-size: 3rem; 
+    margin-top: 50px;   
+  }
+
+  .logout-box > p {
+
+    font-size: 1.8rem;
+    margin-top: 20px;
+  }
+
+  .logout-box .logout-box-btn {
+
+    margin-top: 30px;
+    padding: 20px 30px;
+    background-color: #ff0000; 
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .logout-box .logout-box-connected {
+
+    margin-top: 30px;
+    padding: 20px 30px;
+    background-color: #a3a3a3; /* Cor do botão azul claro */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+
   .sub-topnav {
 
     background: #282A35;
@@ -266,6 +348,17 @@ ul li:hover::after{
 
     background: #17181f;
   }
+
+  .dialog-box {
+    display: none;
+    position: fixed;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    border-radius: 5px;
+}
 
   .home-banner {
 
@@ -599,6 +692,38 @@ ul li:hover::after{
     margin-top: 10px;
     transition: .3s;
   }
+
+  .btn-qui2 {
+
+    padding: 15px 50px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    border: none;
+    background: rgb(4, 170, 109);
+    cursor: pointer;
+    margin-top: 10px;
+    transition: .3s;
+  }
+
+  .btn-qui {
+
+    padding: 15px 20px;
+    color: black;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    border: none;
+    background: rgb(247, 219, 12);
+    transition: .3s;
+    cursor: pointer;
+    margin-top: 10px;
+
+  }
+
 
   .btn-mat2:hover {
 

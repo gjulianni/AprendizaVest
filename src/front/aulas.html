@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AprendizaVest</title>
+  <link rel="stylesheet" href="./css/aulas.css">
+  <link rel="stylesheet" href=
+  "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+<script src="./js/misc/scroll-to-top.js"></script>
+<script src="./js/misc/smooth-scroll.js"></script>
+<script src="./js/auth/geral.js"></script>
+<script src="./js/auth/login.js"></script>
+<script src="./js/auth/cadastro.js"></script>
+<script src="../backend/servidor/src/controladores/usuario.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+
+<style>
+
+        body {
+
+            background-color: #ECF0F1;
+            width: 100vw;
+            height: 100vh;
+
+
+        }
+</style>
+
+<body>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          if (isUserLoggedIn()) {
+            console.log("Usuário está logado");
+            const btnLogout = document.getElementsByClassName('btn-logout')[0];
+            btnLogout.style.display = "flex";
+          
+            const btnLogin = document.getElementsByClassName('btn-logon')[0];
+            btnLogin.style.display = 'none';
+          } else {
+            console.log("Usuário não está logado");
+          }
+        });
+      </script>
+    
+        <nav>
+
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">AprendizaVest</label>
+        <ul>
+            <li><a class="active" href="#">Home</a></li>
+            <li><a href="#">Aulas</a></li>
+            <li><a href="#">Avaliações</a></li>
+            <li><a href="#">Certificados</a></li>
+        </ul>
+
+        <a href="./login.html"><button class="btn-logon">Login</button></a>
+        <button class="btn-logout" onclick="popupLogout()">Sair</button>
+    </nav>
+
+    <script>
+        function popupLogout() {
+
+            const popupLogout = document.getElementsByClassName('logout-container')[0];
+            popupLogout.style.display = "flex";
+        }
+
+        function popupLogoutClose() {
+
+            const popupLogout1 = document.getElementsByClassName('logout-container')[0];
+            popupLogout1.style.display = "none";
+        }
+    </script>
+
+    <div class="logout-container">
+        <div class="logout-box">
+            <button style="position: absolute; top: 0; right: 0; color: red; font-size: 3rem; margin-top: 5px; margin-right: 6px; cursor: pointer; background: none; border: none;" onclick="popupLogoutClose()">X</button>
+            <h1>Você tem certeza que deseja sair?</h1>
+            <p>Todo seu progresso será salvo.</p>
+
+            <button class="logout-box-btn" onclick="logout()">Sair</button>
+            <button class="logout-box-connected" onclick="popupLogoutClose()">Permanecer logado</button>
+        </div>
+    </div>
+    <div class="sub-topnav">
+        <a href="#lpsec" class="smooth-scroll">Língua Portuguesa</a>
+        <a href="#matsec" class="smooth-scroll">Matemática</a>
+        <a href="#fisicasec" class="smooth-scroll">Física</a>
+        <a href="#quimicasec" class="smooth-scroll">Química</a>
+        <a href="#">Biologia</a>
+        <a href="#">Geografia</a>
+        <a href="#">História</a>
+    </div>

@@ -42,9 +42,84 @@
 </style>
 
 <body>
-    
-    </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+          if (isUserLoggedIn()) {
+            console.log("Usuário está logado");
+            const btnLogout = document.getElementsByClassName('btn-logout')[0];
+            btnLogout.style.display = "flex";
+          
+            const btnLogin = document.getElementsByClassName('btn-logon')[0];
+            btnLogin.style.display = 'none';
+
+            const botoesConteudo = document.querySelectorAll('.btn-lp, .btn-mat, .btn-fis, .btn-qui');
+            botoesConteudo.forEach(btn => {
+            btn.addEventListener('click', function() {
+            // Redirecionando para a página desejada quando o botão é clicado
+            window.location.href = "./aulas.html";
+        });
+    });
+
+
+          } else {
+
+            const dialogBox = document.getElementById('dialogBox');
+
+            function positionDialogBox(btn) {
+            const rect = btn.getBoundingClientRect();
+            dialogBox.style.top = rect.bottom + 'px';
+            dialogBox.style.left = rect.left + 'px';
+            dialogBox.style.display = 'block';
+        }
+
+
+        function hideDialogBox() {
+            dialogBox.style.display = 'none';
+        }
+
+
+        const lockedButtons = document.querySelectorAll('.btn-lp, .btn-lp2, .btn-mat, .btn-mat2, .btn-fis, .btn-fis2, .btn-qui, .btn-qui2');
+
+            lockedButtons.forEach(btn => {
+                btn.classList.add('locked-button'); // Adiciona uma classe para estilização
+                btn.innerHTML = '<i class="fas fa-lock"></i> ' + btn.innerHTML; // Adiciona o ícone de cadeado à esquerda do texto
+                btn.style.cursor = 'not-allowed';
+
+                btn.addEventListener('mouseover', function () {
+                    positionDialogBox(btn);
+                });
+
+                btn.addEventListener('mouseleave', function (event) {
+                    if (!isMouseOverDialogBox(event)) {
+                        hideDialogBox();
+                    }
+                });
+            });
+
+            dialogBox.addEventListener('mouseover', function () {
+                dialogBox.style.display = 'block'; // Mantém a dialogBox visível quando o mouse está sobre ela
+            });
+
+            dialogBox.addEventListener('mouseleave', function () {
+                hideDialogBox(); // Oculta a dialogBox quando o mouse sai dela
+            });
+
+            function isMouseOverDialogBox(event) {
+                const rect = dialogBox.getBoundingClientRect();
+                const mouseX = event.clientX;
+                const mouseY = event.clientY;
+
+                return mouseX >= rect.left && mouseX <= rect.right &&
+                       mouseY >= rect.top && mouseY <= rect.bottom;
+            }
+console.log("Usuário não está logado");
+}
+});
+      </script>
+    
         <nav>
 
         <input type="checkbox" id="check">
@@ -60,8 +135,39 @@
         </ul>
 
         <a href="./login.html"><button class="btn-logon">Login</button></a>
-        <button class="btn-logout" onclick="logout()">Sair</button>
+        <button class="btn-logout" onclick="popupLogout()">Sair</button>
     </nav>
+
+    <script>
+        function popupLogout() {
+
+            const popupLogout = document.getElementsByClassName('logout-container')[0];
+            popupLogout.style.display = "flex";
+        }
+
+        function popupLogoutClose() {
+
+            const popupLogout1 = document.getElementsByClassName('logout-container')[0];
+            popupLogout1.style.display = "none";
+        }
+    </script>
+
+
+<div id="dialogBox" class="dialog-box">
+    <p>Você precisa estar autenticado para acessar este conteúdo. <br> <br> Faça <a style="text-decoration: none; font-weight: 700; color: rgb(4, 169, 235);" href="./login.html">login</a> ou <a style="text-decoration: none; font-weight: 700; color: rgb(4, 169, 235);" href="./cadastro.html
+        ">cadastre-se</a> para prosseguir.</p>
+</div> 
+
+    <div class="logout-container">
+        <div class="logout-box">
+            <button style="position: absolute; top: 0; right: 0; color: red; font-size: 3rem; margin-top: 5px; margin-right: 6px; cursor: pointer; background: none; border: none;" onclick="popupLogoutClose()">X</button>
+            <h1>Você tem certeza que deseja sair?</h1>
+            <p>Todo seu progresso será salvo.</p>
+
+            <button class="logout-box-btn" onclick="logout()">Sair</button>
+            <button class="logout-box-connected" onclick="popupLogoutClose()">Permanecer logado</button>
+        </div>
+    </div>
     <div class="sub-topnav">
         <a href="#lpsec" class="smooth-scroll">Língua Portuguesa</a>
         <a href="#matsec" class="smooth-scroll">Matemática</a>
@@ -127,8 +233,8 @@
         <div class="lp-textsection">
             <h1>Química</h1>
             <p>Explore os elementos que compõem o mundo ao nosso redor nas aulas de Química. Desde as reações químicas simples até os conceitos avançados de bioquímica e físico-química, mergulhe em um universo de descobertas científicas.</p>
-            <button class="btn-mat">Acessar conteúdo</button>
-            <button class="btn-mat2">Avaliações</button>
+            <button class="btn-qui">Acessar conteúdo</button>
+            <button class="btn-qui2">Avaliações</button>
         </div>
         <div class="lp-svgsection">
             <img class="lpmat" src="./images/index/chemistry.svg" style="width: 500; height: 395px;">
@@ -145,19 +251,5 @@
         <p>↑</p>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          if (isUserLoggedIn()) {
-            console.log("Usuário está logado");
-            const btnLogout = document.getElementsByClassName('btn-logout')[0];
-            btnLogout.style.display = "flex";
-          
-            const btnLogin = document.getElementsByClassName('btn-logon')[0];
-            btnLogin.style.display = 'none';
-          } else {
-            console.log("Usuário não está logado");
-          }
-        });
-      </script>
 </body>
 </html>

@@ -122,6 +122,10 @@ nav {
     margin-bottom: 50px;
 }
 
+.textfield > input:nth-child(2) {
+    margin-bottom: 50px;
+}
+
 .textfield > label {
 
     color: #000000;
@@ -129,7 +133,7 @@ nav {
     
 }
 
-.btn-login { /* Botão de Login */
+.btn-cadastro { /* Botão de Login */
 
     width: 60%;
     padding: 13px 0px;
@@ -152,7 +156,7 @@ p {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    font-size: 18px;
+    font-size: 1vw;
     margin: 0;
     padding: 0;
 }
@@ -162,82 +166,4 @@ p a {
     color: #0CA0F3;
     font-weight: 500;
     margin-top: 1;
-}
-
-@media only screen and (max-width: 950px) {
-
-  .card-login {
-      width: 85%;
-  }
-
-  .left-login > h1 {
-
-    display: none;
-  }
-
-  .login-svg {
-
-    width: 80%;
-    height: 80%;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-
-  .main-login {
-      flex-direction: column;
-  }
-
-
-  .left-login {
-      width: 100%;
-      height: auto;
-  }
-  .right-login {
-      width: 95%;
-      height: auto;
-  }
-
-  .textfield {
-
-      width: 100%;
-      
-  }
-
-  .textfield > input {
-
-      width: 100%;
-  }
-  
-
-  p {
-      font-size: 15px;
-  }
-}
-
-@media only screen and (max-width: 375px) {
-
-  h2 {
-
-      margin-bottom: 10px;
-  }
-
-  p {
-
-      font-size: 15px;
-  }
-  .banner-innova {
-
-      margin-left: 100px;
-      width: 500px;
-      width: 35vw;
-  }
-
-}
-
-@media (max-height: 700px) {
-
-  .left-login {
-    display: none;
-  }
 }

@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AprendizaVest</title>
-  <link rel="stylesheet" href="./css/login.css">
+  <link rel="stylesheet" href="./css/cadastro.css">
   <link rel="stylesheet" href=
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,16 +56,16 @@
         </div>
         <div class="right-login">
             <div class="card-login">
-                <h1>Login</h1>
+                <h1>Cadastro</h1>
                 <div class="textfield">         
-                    <input type="email" name="login-mail" id="login-mail" placeholder="Seu e-mail">         
-                    <input type="password" name="login-senha" id="login-senha" placeholder="Sua senha">
+                    <input type="email" name="mail" id="mail" placeholder="Seu e-mail">         
+                    <input type="password" name="senha" id="senha" placeholder="Sua senha">
+                    <input type="text" name="nome" id="nome" placeholder="Seu nome completo">
                 </div>
                 <div class="errormsg">
                     Por favor, insira um e-mail válido.
                 </div>
-                <button class="btn-login" onclick="logar()">Login</button>
-                    <p>Não possui uma conta? <br><br><a href="../front/cadastro.html">Cadastre-se!</a></p>
+                <button class="btn-cadastro" onclick="salvarUsuario()">Cadastrar</button>
             </div>
         </div>
     </div>
