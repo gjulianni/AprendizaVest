@@ -81,6 +81,7 @@ body {
     font-size: 1.3rem;
     font-weight: 500;
     position: relative;
+    cursor: pointer;
   }
   
   ul li a {
@@ -848,12 +849,184 @@ ul li:hover::after{
     background: rgb(211, 151, 61);
   }
 
+  .materia-biologia {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5fcb4;
+    height: 45vh;
+    padding: 35px; 
+    
+  }
+
+  .btn-bio {
+
+    padding: 15px 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    border: none;
+    background: rgb(141, 81, 253);
+    transition: .3s;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .btn-bio:hover {
+
+    background: rgb(80, 7, 216);
+  }
+
+  .btn-bio2 {
+
+
+    padding: 15px 50px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    border: none;
+    background: rgb(253, 104, 161);
+    transition: .3s;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .btn-bio2:hover {
+
+    background: rgb(252, 65, 137);
+  }
+
+  .materia-geografia {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #304ef7c9;
+    height: 45vh;
+    padding: 35px; 
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  .btn-geo {
+
+    padding: 15px 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    border: none;
+    background: rgb(141, 250, 235);
+    transition: .3s;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .btn-geo:hover {
+
+    background: rgb(136, 211, 201);
+  }
+
+  .btn-geo2 {
+
+    padding: 15px 50px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    border: none;
+    background: rgb(255, 170, 148);
+    transition: .3s;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .btn-geo2:hover {
+
+    background: rgb(255, 129, 98);
+  }
+
+  .materia-historia {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2c160ffb;
+    height: 45vh;
+    padding: 35px; 
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  .btn-hist {
+
+    padding: 15px 20px;
+    color: black;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    border: none;
+    background: rgb(194, 194, 194);
+    transition: .3s;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .btn-hist:hover {
+
+    background: rgb(95, 95, 95);
+  }
+
+  .btn-hist2 {
+
+    padding: 15px 50px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 15px;
+    border: none;
+    background: rgb(73, 85, 255);
+    transition: .3s;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .btn-hist2:hover {
+
+    background: rgb(28, 43, 252);
+  }
+
   @media (max-width: 715px) {
 
     .materia-quimica {
 
       flex-direction: column;
-      height: 100vh;
+      height: 90vh;
+    }
+
+    .materia-biologia {
+
+      flex-direction: column;
+      height: 90vh;
+    }
+
+    .materia-geografia {
+
+      flex-direction: column;
+      height: 90vh;
+    }
+
+    .materia-historia {
+
+      flex-direction: column;
+      height: 90vh;
     }
   }
 
@@ -874,11 +1047,11 @@ ul li:hover::after{
 
     .materia-lp {
 
-      height: 80vh;
+      height: 90vh;
     }
 
     .materia-mat {
 
-      height: 80vh;
+      height: 90vh;
     }
   }

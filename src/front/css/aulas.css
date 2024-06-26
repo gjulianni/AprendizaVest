@@ -348,3 +348,129 @@ ul li:hover::after{
 
     background: #17181f;
   }
+
+  
+
+  .materias-container {
+
+    max-width: 1400px;
+    padding: 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 200px; 
+    position: relative;
+    margin: 7% 6.5% 0%;
+    
+  }
+
+  .card {
+
+    background-color: #e4e4e4;
+    border-radius: 5px;
+    padding: 20px;
+    cursor: pointer;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    width: 110%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 1px 30px;
+        
+}
+
+.card:hover {
+  transform: scale(1.1); /* Aumenta a escala do card */
+  box-shadow: 0 40px 190px rgba(0, 0, 0, 0.2); /* Aumenta a sombra para criar o efeito de "salto" */
+}
+
+.card > h1 {
+
+  align-self: center;
+  text-align: center;
+}
+
+
+@media (max-width: 1066px) {
+
+  .materias-container {
+
+    margin: 7% 1% 0%;
+  }
+  .card {
+    width: 90%;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .materias-container {
+
+    margin: 0% -7% 0%;
+  }
+
+  .card {
+
+    width: 100%;
+    margin: -5%;
+  }
+}
+
+@media (max-width: 390px) {
+
+  .materias-container {
+
+    margin: 0% -15% 0%;
+  }
+
+  .card {
+
+    width: 95%;
+    
+  }
+}
+
+.container {
+  width: 100%;
+  background: lightblue;
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, #3498db 10%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #3498db 20%);
+  background-size: 30px 30px; /* Adjust the size of the pattern */
+  animation: moveBackground 10s linear infinite; /* Adjust the animation duration and timing function */
+}
+
+@keyframes moveBackground {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(20%, 20%);
+  }
+}
+
+.greeting-container {
+
+  height: 10vh;
+  background-color: #ffffffe5;
+  width: 30vw;
+  border-radius: 0px 30px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -55,7 +55,7 @@
             const btnLogin = document.getElementsByClassName('btn-logon')[0];
             btnLogin.style.display = 'none';
 
-            const botoesConteudo = document.querySelectorAll('.btn-lp, .btn-mat, .btn-fis, .btn-qui');
+            const botoesConteudo = document.querySelectorAll('.btn-lp, .btn-mat, .btn-fis, .btn-qui, .btn-bio, .btn-geo, .btn-hist');
             botoesConteudo.forEach(btn => {
             btn.addEventListener('click', function() {
             // Redirecionando para a página desejada quando o botão é clicado
@@ -81,8 +81,23 @@
         }
 
 
-        const lockedButtons = document.querySelectorAll('.btn-lp, .btn-lp2, .btn-mat, .btn-mat2, .btn-fis, .btn-fis2, .btn-qui, .btn-qui2');
+        const lockedButtons = document.querySelectorAll('.btn-lp, .btn-lp2, .btn-mat, .btn-mat2, .btn-fis, .btn-fis2, .btn-qui, .btn-qui2, .btn-bio, .btn-bio2, .btn-geo, .btn-geo2, .btn-hist, .btn-hist2');
+        const paginaAulas = document.getElementById('pagina-aulas');
+        const paginaAulasLink = document.querySelector('#pagina-aulas a');
+        const paginaSimulados = document.getElementById('pagina-simulados');
+        const paginaSimuladosLink = document.querySelector('#pagina-simulados a');
 
+        paginaAulas.addEventListener('click', function () {
+
+            positionDialogBox(paginaAulas);
+            paginaAulasLink.removeAttribute('href');
+        });
+
+        paginaSimulados.addEventListener('click', function () {
+
+            positionDialogBox(paginaSimulados);
+            paginaSimuladosLink.removeAttribute('href');
+        });
             lockedButtons.forEach(btn => {
                 btn.classList.add('locked-button'); // Adiciona uma classe para estilização
                 btn.innerHTML = '<i class="fas fa-lock"></i> ' + btn.innerHTML; // Adiciona o ícone de cadeado à esquerda do texto
@@ -128,9 +143,9 @@ console.log("Usuário não está logado");
         </label>
         <label class="logo">AprendizaVest</label>
         <ul>
-            <li><a class="active" href="#">Home</a></li>
-            <li><a href="#">Aulas</a></li>
-            <li><a href="#">Avaliações</a></li>
+            <li><a class="active" href="index.html">Home</a></li>
+            <li id="pagina-aulas"><a href="aulas.html">Aulas</a></li>
+            <li id="pagina-simulados"><a href="#">Simulados</a></li>
             <li><a href="#">Certificados</a></li>
         </ul>
 
@@ -169,13 +184,13 @@ console.log("Usuário não está logado");
         </div>
     </div>
     <div class="sub-topnav">
-        <a href="#lpsec" class="smooth-scroll">Língua Portuguesa</a>
+        <a href="#lpsec" class="smooth-scroll">Gramática</a>
         <a href="#matsec" class="smooth-scroll">Matemática</a>
         <a href="#fisicasec" class="smooth-scroll">Física</a>
         <a href="#quimicasec" class="smooth-scroll">Química</a>
-        <a href="#">Biologia</a>
-        <a href="#">Geografia</a>
-        <a href="#">História</a>
+        <a href="#biosec" class="smooth-scroll">Biologia</a>
+        <a href="#geosec" class="smooth-scroll">Geografia</a>
+        <a href="#histsec" class="smooth-scroll">História</a>
     </div>
     <section class="home-banner">
         <div class="home-texts">
@@ -238,6 +253,41 @@ console.log("Usuário não está logado");
         </div>
         <div class="lp-svgsection">
             <img class="lpmat" src="./images/index/chemistry.svg" style="width: 500; height: 395px;">
+        </div>
+    </section>
+    <section class="materia-biologia" id="biosec">
+        <div class="lp-textsection">
+            <h1>Biologia</h1>
+            <p>Explore o estudo dos seres vivos, suas estruturas, funções e interações, compreendendo a diversidade e a evolução da vida na Terra.</p>
+            <button class="btn-bio">Acessar conteúdo</button>
+            <button class="btn-bio2">Avaliações</button>
+        </div>
+        <div class="lp-svgsection">
+            <img class="lpmat" src="./images/index/bio.svg" style="width: 500; height: 395px;">
+        </div>
+    </section>
+    <section class="materia-geografia" id="geosec">
+        <div class="lp-textsection">
+            <h1>Geografia</h1>
+            <p>Estudo das interações entre o ambiente natural e as sociedades humanas. Explora paisagens, climas, recursos naturais e fenômenos geográficos, 
+            proporcionando insights cruciais para entender as dinâmicas globais e locais.</p>
+            <button class="btn-geo">Acessar conteúdo</button>
+            <button class="btn-geo2">Avaliações</button>
+        </div>
+        <div class="lp-svgsection">
+            <img class="lpmat" src="./images/index/geo.svg" style="width: 500; height: 395px;">
+        </div>
+    </section>
+    <section class="materia-historia" id="histsec">
+        <div class="lp-textsection">
+            <h1>História</h1>
+            <p>Investigação das sociedades humanas ao longo do tempo, abrangendo desde as origens da civilização até os eventos contemporâneos. 
+            Essencial para compreender as culturas, as mudanças políticas e sociais, e os padrões que moldaram o mundo moderno.</p>
+            <button class="btn-hist">Acessar conteúdo</button>
+            <button class="btn-hist2">Avaliações</button>
+        </div>
+        <div class="lp-svgsection">
+            <img class="lpmat" src="./images/index/history.svg" style="width: 500; height: 395px;">
         </div>
     </section>
 
