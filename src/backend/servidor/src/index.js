@@ -1,7 +1,6 @@
 // Importa o pacote express e coloca na variável express
 const express = require("express");
 // Importa o pacote cors e coloca na variável cors
-// CORS (Cross-Origin Resource Sharing)
 const cors = require("cors");
 // Importa as funções exportadas do módulo usuario
 const { cadastrarUsuario, login } = require("./controladores/usuario");
@@ -12,10 +11,8 @@ const { salvarQuestionario, listarQuestionario, verificarAprovacao } = require("
 // Importa o pacote dotenv e coloca na variável dotenv
 const dotenv = require("dotenv");
 // Carregar as variáveis de ambiente do arquivo .env no objeto process.env do Node
-// O arquivo .env precisa estar na raiz do projeto
 dotenv.config();
 
-// Será usado 3000 se a variável de ambiente não tiver sido definida
 const PORTA = process.env.PORTA || 3000;
 // Cria o servidor e coloca na variável app
 const app = express(); 
@@ -54,6 +51,6 @@ app.post("/verificar-aprovacao", async (req, res) => {
     }
 });
 
-app.use(function(req,res){
-    res.json({erro:"Rota desconhecida"});
+app.use(function(req, res) {
+    res.json({ erro: "Rota desconhecida" });
 });

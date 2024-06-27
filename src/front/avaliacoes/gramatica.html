@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AprendizaVest</title>
-  <link rel="stylesheet" href="./css/aulas.css">
+  <link rel="stylesheet" href="../css/avaliacao.css">
   <link rel="stylesheet" href=
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,14 +17,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-<script src="./js/misc/scroll-to-top.js"></script>
-<script src="./js/misc/smooth-scroll.js"></script>
 <script src="./js/auth/geral.js"></script>
 <script src="./js/auth/login.js"></script>
 <script src="./js/auth/cadastro.js"></script>
 <script src="./js/misc/greetings.js"></script>
 <script src="./js/misc/saudacao.js"></script>
 <script src="../backend/servidor/src/controladores/usuario.js"></script>
+<script src="../../backend/servidor/src/controladores/questionario.js"></script>
+<script src="../../backend/servidor/src/controladores/questao.js"></script>
+<script src="../../backend/servidor/src/controladores/bd.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +36,7 @@
 
         body {
 
-            /* background-color: #d0f9ff; */
+             background-color: #cacaca; 
             width: 100vw;
             height: 100vh;
 
@@ -111,67 +112,5 @@
         <a href="#">Geografia</a>
         <a href="#">História</a>
     </div>
-
-
-
-    <div class="container">
-      <div class="greeting-container">
-      <h2 id="greeting"></h2>
-    </div>
-    <div class="main-materias">
-    <div class="materias-container">
-      <div class="card">
-        <img id="lpcard-img" src="./images/aulas/lp.jpg">
-        <h1>Gramática</h1>
-        <p style="font-size: 20px; margin-bottom: 0;">A gramática é o estudo das regras e estruturas que governam o uso de uma língua. 
-        Ela abrange desde a formação de palavras e frases até a correta aplicação de normas gramaticais, ajudando a melhorar a clareza 
-        e a precisão na comunicação escrita e oral.</p>
-      </div>
-      <div class="card">
-        <img id="matcard-img" src="./images/aulas/123.png">
-        <h1>Matemática</h1>
-        <p style="font-size: 20px; margin-bottom: 0;">A Matemática é o estudo dos números, formas, quantidades e padrões. Ela 
-        desenvolve habilidades analíticas e lógicas, permitindo resolver problemas complexos e entender a estrutura do universo.
-        </p>
-      </div>
-      <div class="card">
-        <img id="fiscard-img" src="./images/aulas/fisica.jpg">
-        <h1>Física</h1>
-        <p style="font-size: 20px; margin-bottom: 0;">A Física explora as leis fundamentais que regem o comportamento do universo. 
-        Desde o movimento dos corpos até a natureza da luz e da energia, essa ciência busca compreender e explicar os fenômenos naturais, 
-        utilizando modelos teóricos e experimentos.</p>
-      </div>
-      <div class="card">
-        <img id="quicard-img" src="./images/aulas/quimica.jpg">
-        <h1>Química</h1>
-        <p style="font-size: 20px; margin-bottom: 0;">A Química investiga a composição, estrutura, propriedades e mudanças das substâncias. 
-        Ela desempenha um papel crucial na nossa vida cotidiana, desde a produção de medicamentos até a fabricação de materiais.</p>
-      </div>
-      <div class="card">
-        <img id="biocard-img" src="./images/aulas/bio.jpg">
-        <h1>Biologia</h1>
-        <p style="font-size: 20px; margin-bottom: 0;">A Biologia é a ciência que estuda os seres vivos e seus processos vitais. Ela 
-        abrange desde a compreensão das células e organismos até a ecologia e evolução. Aprender Biologia é fundamental para entender 
-        a vida em todas as suas formas, promover a saúde e a conservação da biodiversidade.</p>
-      </div>
-      <div class="card">
-        <img id="geocard-img" src="./images/aulas/geo.jpg">
-        <h1>Geografia</h1>
-        <p style="font-size: 20px; margin-bottom: 0;">A Geografia analisa a Terra e suas características físicas, bem como a interação 
-        entre o meio ambiente e as atividades humanas. Ela estuda paisagens, climas, recursos naturais e fenômenos geográficos. 
-        Conhecer Geografia é vital para a compreensão dos desafios ambientais e sociais globais, além de promover o planejamento sustentável.</p>
-      </div>
-      <div class="card">
-        <img id="histcard-img" src="./images/aulas/historia.png">
-        <h1>História</h1>
-        <p style="font-size: 20px; margin-bottom: 0;">A História examina os eventos passados e as transformações das sociedades humanas ao longo do tempo. 
-        Ela busca entender como culturas, civilizações e nações se desenvolveram e interagiram. Estudar História é essencial para compreender o presente e 
-        planejar o futuro, aprendendo com os sucessos e erros do passado.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
     </body>
-
     </html>

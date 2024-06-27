@@ -1,0 +1,50 @@
+--Respostas das questões matéria Gramática
+insert into tbresposta(idquestao, texto, correta)
+values
+(1, 'conduzindo', false),
+(1, 'conduzido', true),
+(1, 'conduz', false),
+(1, 'conduziu', false),
+(2, 'essas', true),
+(2, 'estas', false),
+(2, 'esses', false),
+(2, 'esta', false),
+(3, 'Faz', true),
+(3, 'Fazem', false),
+(3, 'Fazia', false),
+(3, 'A', false),
+(4, 'avaliando', false),
+(4, 'avaliando-os', false),
+(4, 'avaliando-lhes', true),
+(4, 'avaliando-se', false),
+(5, 'Todos alunos chegou cedo para a prova', false),
+(5, 'Todos aluno chegaram cedo para a prova', false),
+(5, 'Todo aluno chegaram cedo para a prova', false),
+(5, 'Todos alunos chegaram cedo para a prova', true),
+(6, 'Adjunto adverbial', false),
+(6, 'Objeto direto', true),
+(6, 'Sujeito', false),
+(6, 'Objeto indireto', false),
+(7, 'Ele chegou tarde; portanto não participou da reunião.', false),
+(7, 'Ele chegou tarde, portanto não participou da reunião.', false),
+(7, 'Ele chegou tarde, portanto, não participou da reunião.', false),
+(7, 'Ele chegou tarde; portanto, não participou da reunião.', true),
+(8, 'O livro que estava na estante, estava empoeirado.', false),
+(8, 'O livro que estava na estante estava empoeirado.', false),
+(8, 'O livro, que estava na estante estava empoeirado.', false),
+(8, 'O livro, que estava na estante, estava empoeirado.', true),
+(9, 'Ele assistiu o filme no cinema.', false),
+(9, 'Ele assistiu com o filme no cinema.', false),
+(9, 'Ele assistiu ao filme no cinema.', true),
+(9, 'Ele assistiu de filme no cinema.', false),
+(10, 'Gostei muito do livro que você me indicou.', true),
+(10, 'Gostei muito pelo livro que você me indicou.', false),
+(10, 'Gostei muito com o livro que você me indicou.', false),
+(10, 'Gostei muito ao livro que você me indicou.', false)
+
+--Materias na tbavaliacao
+insert into tbavaliacao (idavaliacao, nome, descricao)
+values
+(1, 'Gramática', 'A avaliação de Gramática cobrirá todo o conteúdo do curso resumido em 10 questões.'),
+(2, 'Matemática', 'A avaliação de Matemática cobrirá todo o conteúdo do curso resumido em 10 questões.'),
+(3, 'Física', 'A avaliação de Física cobrirá todo o conteúdo do curso resumido em 10 questões.')
