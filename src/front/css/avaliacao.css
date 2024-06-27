@@ -348,3 +348,147 @@ ul li:hover::after{
 
     background: #17181f;
   }
+
+  .main-avaliacao {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+
+  .questoes-container {
+    background-color: #D9D9D9;
+    padding: 100px;
+    border-radius: 15px;
+    width: 60%;
+    height: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .questoes-container > h3 {
+
+    font-weight: 300;
+    font-size: 2rem;
+    
+  }
+
+  .questoes-container > h2 {
+
+    font-weight: 600;
+    font-size: 2rem;
+    margin-top: 0;
+    
+  }
+
+  .text-area {
+    background-color: white;
+    padding: 40px;
+    border-radius: 30px;
+    height: 170px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: 5px solid #0BA3F9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .text-area p {
+
+    margin: 0;
+    font-size: 1.7rem;
+    font-weight: 500;
+    display: inline;
+    
+  }
+
+h3 {
+
+    margin-top: 0px;
+  }
+
+  .setinhas {
+    position: relative;
+    bottom: 0;
+    display: flex;
+    width: 100%; /* Ajuste a largura conforme necessário */
+    justify-content: space-between; /* Adiciona espaço igual entre os elementos */
+  }
+  
+  .setinhas h1:first-child {
+    position: absolute;
+    left: 0;
+  }
+  
+  .setinhas h1:last-child {
+    position: absolute;
+    right: 0;
+  }
+
+  .setinhas > h1 {
+
+    color: #0BA3F9;
+    font-size: 4rem;
+    font-weight: bolder;
+    cursor: pointer;
+    margin: 0;
+    
+  }
+
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+  }
+  
+  .options label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 300;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .options input[type="radio"] {
+    appearance: none; /* Remove os estilos padrão do navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #0BA3F9;
+    border-radius: 50%;
+    margin-right: 10px; /* Espaço entre o input e o span */
+    cursor: pointer;
+  }
+  
+  .options input[type="radio"]:checked {
+    background-color: #0BA3F9;
+  }
+  
+  .options input[type="radio"] + span {
+    display: flex;
+    align-items: center; /* Alinha verticalmente */
+    white-space: nowrap; /* Evita que o texto quebre para uma nova linha */
+  }
+  
+  
+  
+  .options input:checked + span {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }

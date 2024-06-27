@@ -17,15 +17,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-<script src="./js/auth/geral.js"></script>
-<script src="./js/auth/login.js"></script>
-<script src="./js/auth/cadastro.js"></script>
-<script src="./js/misc/greetings.js"></script>
-<script src="./js/misc/saudacao.js"></script>
-<script src="../backend/servidor/src/controladores/usuario.js"></script>
+<script src="../js/auth/login.js"></script>
+<script src="../js/auth/geral.js"></script>
+<script src="../js/auth/cadastro.js"></script>
+<script src="../../backend/servidor/src/controladores/usuario.js"></script>
 <script src="../../backend/servidor/src/controladores/questionario.js"></script>
 <script src="../../backend/servidor/src/controladores/questao.js"></script>
 <script src="../../backend/servidor/src/controladores/bd.js"></script>
+<script src="./js/avaliacao.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,5 +111,28 @@
         <a href="#">Geografia</a>
         <a href="#">História</a>
     </div>
+
+    <div class="main-avaliacao">
+    <div class="questoes-container">
+      <div class="questao">
+        <h2 id="questao-numero"></h2>
+      </div>
+      <div class="text-area">
+        <p id="enunciado"></p>
+      </div>
+      <h3>Enunciado</h3>
+      <div class="options" id="options">
+        <input type="hidden" name="idquestao" />
+      </div>
+      <div class="setinhas">
+        <h1 onclick="questaoAnterior()">&#129144;</h1>
+        <h1 onclick="proximaQuestao()">&#129146;</h1>
+      </div>
+    </div>
+    <button onclick="enviarRespostas()">Concluir avaliação</button>
+  </div>
+  
+
+
     </body>
     </html>

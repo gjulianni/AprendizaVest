@@ -54,70 +54,71 @@ Padrão de requisição para cadastrar um questionário
 
 
 async function salvarQuestionario(req, res) {
-  const { idusuario, questoes } = req.body;
+  const { idusuario, idavaliacao, respostas } = req.body;
 
-  if (!idusuario) {
-    return res.json({ erro: "Forneça os seus dados." });
-  } else if (!questoes || questoes.length == 0) {
-    return res.json({ erro: "Forneça as questões do questionário." });
-  } else {
-    // Verifica se o usuário já tem algum questionário com nota >= 70
-    let resposta = await pool.query(
+  if (!idusuario || !idavaliacao || !respostas || respostas.length === 0) {
+    return res.status(400).json({ erro: "Dados incompletos." });
+  }
+
+  try {
+    // Verifica se o usuário já tem alguma avaliação aprovada nesta avaliação
+    const resposta = await pool.query(
       `SELECT nota::float
-     FROM tbquestionario
-     WHERE idusuario = $1 AND nota >= 70`,
-      [idusuario]
-      
+       FROM tbquestionario
+       WHERE idusuario = $1 AND idavaliacao = $2 AND nota >= 70`,
+      [idusuario, idavaliacao]
     );
 
-    if (resposta.rowCount > 0 && resposta.rows[0].nota > 0) {
-      return res.status(201).json({
-        erro: `Você não pode responder o questionário novamente. Você já foi aprovado com nota ${resposta.rows[0].nota}.`,
-        nota: resposta.rows[0].nota,
+    if (resposta.rowCount > 0 && resposta.rows[0].nota >= 70) {
+      return res.status(400).json({
+        erro: `Você já foi aprovado nesta avaliação com nota ${resposta.rows[0].nota}.`
       });
-    } else {
-      // Calcula a nota nas questões
-      let soma = 0;
-      for (let i = 0; i < questoes.length; i++) {
-        // O comando SQL retorna 0 ou 1, sendo 1 ao acertar a questão
-        resposta = await pool.query(
-          `SELECT count(*)::INTEGER 
-            FROM tbquestao
-            WHERE idquestao = $1 AND resposta = $2`,
-          [questoes[i].idquestao, questoes[i].resposta]
-        );
-        // somatório das notas
-        soma += resposta.rows[0].count;
-      }
-
-      // Obtém a média de acertos
-      let nota = (soma / questoes.length) * 100;
-
-      if (nota >= 70) {
-        // Cria o questionário
-        const respostaQuestionario = await pool.query(
-          "INSERT INTO tbquestionario(idusuario,nota) VALUES ($1,$2) RETURNING idquestionario,datahorario,nota",
-          [idusuario, nota]
-        );
-        const idquestionario = respostaQuestionario.rows[0].idquestionario;
-        if (idquestionario) {
-          // Salva cada questão
-          for (let i = 0; i < questoes.length; i++) {
-            resposta = await pool.query(
-              "INSERT INTO tbquestao_por_questionario(idquestionario,idquestao,resposta) VALUES ($1,$2,$3) RETURNING idquestionario,idquestao,resposta",
-              [idquestionario, questoes[i].idquestao, questoes[i].resposta]
-            );
-          }
-          return res.status(202).json(respostaQuestionario.rows[0]);
-        } else {
-          return res.json({ erro: "Problemas ao salvar o questionário. Tente novamente" });
-        }
-        
-      } else {
-        return res.status(400).json({ erro: `Você obteve nota ${nota}. Tente novamente.`, nota });
-      }
-
     }
+
+    // Calcula a nota com base nas respostas
+    let acertos = 0;
+    for (const resposta of respostas) {
+      const resultado = await pool.query(
+        `SELECT correta
+         FROM tbresposta
+         WHERE idresposta = $1`,
+        [resposta.idresposta]
+      );
+
+      if (resultado.rows.length > 0 && resultado.rows[0].correta) {
+        acertos++;
+      }
+    }
+
+    const totalQuestoes = respostas.length;
+    const nota = (acertos / totalQuestoes) * 100;
+
+    if (nota >= 70) {
+      // Registra o questionário com nota >= 70 no banco
+      const queryInsertQuestionario = `
+        INSERT INTO tbquestionario (idusuario, idavaliacao, nota)
+        VALUES ($1, $2, $3)
+        RETURNING idquestionario`;
+      const valuesInsertQuestionario = [idusuario, idavaliacao, nota];
+
+      const { rows } = await pool.query(queryInsertQuestionario, valuesInsertQuestionario);
+      const idquestionario = rows[0].idquestionario;
+
+      // Registra as respostas no questionário
+      for (const resposta of respostas) {
+        await pool.query(
+          `INSERT INTO tbquestao_por_questionario (idquestionario, idquestao, idresposta)
+           VALUES ($1, $2, $3)`,
+          [idquestionario, resposta.idquestao, resposta.idresposta]
+        );
+      }
+
+      return res.status(201).json({ mensagem: "Avaliação registrada com sucesso.", nota });
+    } else {
+      return res.status(400).json({ erro: `Sua nota foi ${nota}. Você não atingiu a nota mínima para aprovação.` });
+    }
+  } catch (error) {
+    return res.status(500).json({ erro: "Erro ao salvar avaliação.", detalhes: error.message });
   }
 }
 

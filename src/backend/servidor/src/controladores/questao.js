@@ -5,7 +5,7 @@ async function listarQuestao(req, res) {
 
   try {
     const questoesQuery = `
-      SELECT q.idquestao, q.enunciado, r.idresposta, r.texto, r.correta
+      SELECT q.idavaliacao, q.idquestao, q.enunciado, r.idresposta, r.texto, r.correta
       FROM tbquestao q
       JOIN tbresposta r ON q.idquestao = r.idquestao
       WHERE q.materia = $1
@@ -18,6 +18,7 @@ async function listarQuestao(req, res) {
     questoes.forEach(row => {
       if (!questoesFormatadas[row.idquestao]) {
         questoesFormatadas[row.idquestao] = {
+          idavaliacao: row.idavaliacao,
           idquestao: row.idquestao,
           enunciado: row.enunciado,
           respostas: []
@@ -30,10 +31,6 @@ async function listarQuestao(req, res) {
         correta: row.correta
       });
     });
-
-    console.log(`Matéria recebida: ${materia}`);
-    console.log(`Questões encontradas: ${questoes.length}`);
-    console.log(`Questões formatadas: `, questoesFormatadas);
 
     return res.json(Object.values(questoesFormatadas));
   } catch (err) {
