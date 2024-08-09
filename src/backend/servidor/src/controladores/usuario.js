@@ -11,7 +11,7 @@ async function cadastrarUsuario(req, res) {
   } else if (!senha || senha.length == 0){
     return res.json({erro: "Forneça a senha."});
   } else {
-    // Antes de criar um novo usuário, vamos ver se o e-mail já existe
+    // Antes de criar um novo usuário, confere se o e-mail já existe
     let resposta = await pool.query(
       "SELECT idusuario,mail,nome,senha FROM tbusuario WHERE mail=$1 LIMIT 1",
       [mail]
@@ -64,5 +64,4 @@ async function login(req, res) {
   }
 }
 
-// Exporta as funções
 module.exports = { cadastrarUsuario, login };

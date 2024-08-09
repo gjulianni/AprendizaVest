@@ -40,11 +40,12 @@ app.post("/questionario", salvarQuestionario);
 // Rota para resgatar o questionário
 app.get("/questionario", listarQuestionario);
 
+
 app.post("/verificar-aprovacao", async (req, res) => {
-    const { idusuario } = req.body;
+    const { idusuario, materiaID } = req.body;
 
     try {
-        const resultado = await verificarAprovacao(idusuario);
+        const resultado = await verificarAprovacao(idusuario, materiaID);
         res.json(resultado);
     } catch (error) {
         res.status(401).json({ erro: error.message });

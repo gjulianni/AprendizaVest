@@ -2,31 +2,37 @@ const { pool } = require("./bd.js");
 
 
 async function listarQuestionario(req, res) {
-  const { idusuario } = req.body;
+  const { idusuario } = req.query;
 
   if (!idusuario) {
     return res.json({ erro: "Forneça os seus dados." });
   } else {
     try {
+      // Obter as avaliações do usuário
       let resposta = await pool.query(
-        `SELECT idquestionario, datahorario, nota::float
-         FROM tbquestionario
-         WHERE idusuario = $1`,
+        `SELECT id, datahorario, score::float
+         FROM avaliacoes
+         WHERE id_usuario = $1`,
         [idusuario]
       );
 
       if (resposta.rowCount > 0) {
-        const questionario = resposta.rows[0];
+        const questionarios = resposta.rows;
 
-        resposta = await pool.query(
-          `SELECT b.enunciado, a.resposta as "respondido", b.resposta as "correto" 
-           FROM tbquestao_por_questionario as a
-           JOIN tbquestao as b ON a.idquestao = b.idquestao
-           WHERE a.idquestionario = $1`,
-          [questionario.idquestionario]
-        );
+        // Obter as questões e respostas associadas a cada avaliação
+        for (const questionario of questionarios) {
+          const questoesResposta = await pool.query(
+            `SELECT b.enunciado, a.res_selecionada_id as "respondido", b.id as "correto"
+             FROM avaliacoesinfo as a
+             JOIN questoes as b ON a.questao_id = b.id
+             WHERE a.avaliacao_id = $1`,
+            [questionario.id]
+          );
 
-        return res.json({ questionario, questoes: resposta.rows });
+          questionario.questoes = questoesResposta.rows;
+        }
+
+        return res.json({ questionarios });
       } else {
         return res.json({
           erro: "Você não tem questionário respondido com nota para ser aprovado.",
@@ -37,6 +43,7 @@ async function listarQuestionario(req, res) {
     }
   }
 }
+
 
 /*
 Padrão de requisição para cadastrar um questionário
@@ -54,119 +61,117 @@ Padrão de requisição para cadastrar um questionário
 
 
 async function salvarQuestionario(req, res) {
-  const { idusuario, idavaliacao, respostas } = req.body;
+  const { idusuario, materiaID, questoes } = req.body;
 
-  if (!idusuario || !idavaliacao || !respostas || respostas.length === 0) {
+  if (!idusuario || !materiaID || !questoes || questoes.length === 0) {
     return res.status(400).json({ erro: "Dados incompletos." });
   }
 
   try {
-    // Verifica se o usuário já tem alguma avaliação aprovada nesta avaliação
+    // Verifica se o usuário já tem alguma avaliação aprovada nesta matéria
     const resposta = await pool.query(
-      `SELECT nota::float
-       FROM tbquestionario
-       WHERE idusuario = $1 AND idavaliacao = $2 AND nota >= 70`,
-      [idusuario, idavaliacao]
+      `SELECT score::float
+       FROM avaliacoes
+       WHERE id_usuario = $1 AND materia_id = $2 AND score >= 7`,
+      [idusuario, materiaID]
     );
 
-    if (resposta.rowCount > 0 && resposta.rows[0].nota >= 70) {
+    if (resposta.rowCount > 0 && resposta.rows[0].nota >= 0) {
       return res.status(400).json({
         erro: `Você já foi aprovado nesta avaliação com nota ${resposta.rows[0].nota}.`
       });
     }
 
-    // Calcula a nota com base nas respostas
-    let acertos = 0;
-    for (const resposta of respostas) {
-      const resultado = await pool.query(
-        `SELECT correta
-         FROM tbresposta
-         WHERE idresposta = $1`,
-        [resposta.idresposta]
+    // Cria uma nova avaliação
+    const novaAvaliacao = await pool.query(
+      'INSERT INTO avaliacoes (id_usuario, materia_id) VALUES ($1, $2) RETURNING id',
+      [idusuario, materiaID]
+    );
+
+    const idavaliacao = novaAvaliacao.rows[0].id;
+    let score = 0;
+
+    for (const questao of questoes) {
+      const { idquestao, idresposta } = questao;
+      
+      // Verifica se a resposta está correta
+      const result = await pool.query(
+        'SELECT correta FROM respostas WHERE id = $1 AND questao_id = $2',
+        [idresposta, idquestao]
       );
 
-      if (resultado.rows.length > 0 && resultado.rows[0].correta) {
-        acertos++;
-      }
-    }
-
-    const totalQuestoes = respostas.length;
-    const nota = (acertos / totalQuestoes) * 100;
-
-    if (nota >= 70) {
-      // Registra o questionário com nota >= 70 no banco
-      const queryInsertQuestionario = `
-        INSERT INTO tbquestionario (idusuario, idavaliacao, nota)
-        VALUES ($1, $2, $3)
-        RETURNING idquestionario`;
-      const valuesInsertQuestionario = [idusuario, idavaliacao, nota];
-
-      const { rows } = await pool.query(queryInsertQuestionario, valuesInsertQuestionario);
-      const idquestionario = rows[0].idquestionario;
-
-      // Registra as respostas no questionário
-      for (const resposta of respostas) {
-        await pool.query(
-          `INSERT INTO tbquestao_por_questionario (idquestionario, idquestao, idresposta)
-           VALUES ($1, $2, $3)`,
-          [idquestionario, resposta.idquestao, resposta.idresposta]
-        );
+      const correta = result.rows.length > 0 && result.rows[0].correta;
+      if (correta) {
+        score += 1; // Incrementa a pontuação se a resposta estiver correta
       }
 
-      return res.status(201).json({ mensagem: "Avaliação registrada com sucesso.", nota });
-    } else {
-      return res.status(400).json({ erro: `Sua nota foi ${nota}. Você não atingiu a nota mínima para aprovação.` });
+      // Salva a resposta na tabela de resultados
+      await pool.query(
+        `INSERT INTO avaliacoesinfo (avaliacao_id, questao_id, res_selecionada_id, correta)
+         VALUES ($1, $2, $3, $4)`,
+        [idavaliacao, idquestao, idresposta, correta]
+      );
     }
+
+    // Atualiza a avaliação com a pontuação total
+    await pool.query(
+      'UPDATE avaliacoes SET score = $1 WHERE id = $2',
+      [score, idavaliacao]
+    );
+
+    res.json({ score });
   } catch (error) {
-    return res.status(500).json({ erro: "Erro ao salvar avaliação.", detalhes: error.message });
+    console.error('Erro ao salvar questionário:', error);
+    res.status(500).json({ erro: 'Erro ao salvar questionário.', detalhes: error.message });
   }
 }
 
-async function verificarAprovacao(idusuario) {
+async function verificarAprovacao(idusuario, materiaID) {
 
   if (!idusuario) {
+    console.log('forneca o idusuario');
     throw new Error("Forneça o ID do usuário.");
   }
 
   let resposta = await pool.query(
-    `SELECT idquestionario, nota::float, datahorario
-     FROM tbquestionario
-     WHERE idusuario = $1 AND nota >= 70
-     ORDER BY datahorario DESC
-     LIMIT 1`,  // Obtém apenas o questionário mais recente com nota >= 70
-    [idusuario]
+    `SELECT id, score::float, datahorario
+         FROM avaliacoes
+         WHERE id_usuario = $1 AND score >= 7 AND materia_id = $2
+         ORDER BY datahorario DESC
+         LIMIT 1`,  // Obtém apenas o questionário mais recente com nota >= 7
+    [idusuario, materiaID]
   );
 
   if (resposta.rowCount > 0) {
 
-    const idQuestionario = resposta.rows[0].idquestionario;
+    const idQuestionario = resposta.rows[0].id;
 
       // Agora, obtenha as respostas associadas a esse questionário
       
       const respostasQuestoes = await pool.query(
-        `SELECT q.enunciado, qq.resposta
-       FROM tbquestao_por_questionario qq
-       JOIN tbquestao q ON qq.idquestao = q.idquestao
-       WHERE qq.idquestionario = $1`,
+        `SELECT q.enunciado, r.alternativas AS resposta_selecionada
+        FROM avaliacoesinfo qq
+        JOIN questoes q ON qq.questao_id = q.id
+        JOIN respostas r ON r.id = qq.res_selecionada_id
+        WHERE qq.avaliacao_id = $1`,
       [idQuestionario]
       );
-
         
       const respostasApenas = respostasQuestoes.rows.map(item => ({
         enunciado: item.enunciado,
-        resposta: item.resposta
+        resposta: item.resposta_selecionada
     }));
 
     return {
         aprovado: true,
-        nota: resposta.rows[0].nota,
+        score: resposta.rows[0].score,
         datahorario: resposta.rows[0].datahorario,
         respostasQuestionario: respostasApenas
     };
   } else {
     return {
       aprovado: false,
-      nota: null,
+      score: null,
       datahorario: null,
       respostasQuestionario: null
     };

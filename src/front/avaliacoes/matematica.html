@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AprendizaVest</title>
+  <title>Avaliação</title>
   <link rel="stylesheet" href="../css/avaliacao.css">
   <link rel="stylesheet" href=
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -24,14 +24,14 @@
 <script src="../../backend/servidor/src/controladores/questionario.js"></script>
 <script src="../../backend/servidor/src/controladores/questao.js"></script>
 <script src="../../backend/servidor/src/controladores/bd.js"></script>
-<script>
-  const materiaID = 1;
-</script>
 
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<script>
+  const materiaID = 2;
+</script>
 </head>
 
 <style>
@@ -48,8 +48,6 @@
 
 <body>
 
-  
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
           if (isUserLoggedIn()) {
@@ -64,43 +62,51 @@
           }
         });
       </script>
+      
 
-      <script>
-       async function verificarAprovacao(idusuario, materiaID) {
-                const respostaAprovacao = await fetch('http://localhost:3030/verificar-aprovacao', { // Acessa o servidor backend
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({ idusuario, materiaID })
-                });
-          
-                const data = await respostaAprovacao.json();
-                console.log('Dados da resposta:', data);
-          
-                if (data.aprovado) {
-                  console.log('Usuário aprovado.');
-                  const blockPopup = document.getElementsByClassName('popup-container')[0];
-                  blockPopup.style.display = "flex";
-                  document.getElementById("score-text").innerText = `Sua nota: ${data.score}`;
-                } 
-              }
+<script>
+  async function verificarAprovacao(idusuario, materiaID) {
+           const respostaAprovacao = await fetch('http://localhost:3030/verificar-aprovacao', { // Acessa o servidor backend
+             method: 'POST',
+             headers: {
+               'Content-Type': 'application/json'
+             },
+             body: JSON.stringify({ idusuario, materiaID })
+           });
+     
+           const data = await respostaAprovacao.json();
+           console.log('Dados da resposta:', data);
+     
+           if (data.aprovado) {
+             console.log('Usuário aprovado.');
+             const blockPopup = document.getElementsByClassName('popup-container')[0];
+             blockPopup.style.display = "flex";
+             document.getElementById("score-text").innerText = `Sua nota: ${data.score}`;
+           } 
+         }
 
-              document.addEventListener("DOMContentLoaded", async () => {
-                const usuarioLogadoJSON = localStorage.getItem('usuario');
-                const usuarioLogado = JSON.parse(usuarioLogadoJSON);
-                const idusuario = usuarioLogado.idusuario;
-                if (idusuario !== null) {
-                  // O ID do usuário logado foi encontrado no armazenamento local
-                  // Converte para o tipo apropriado, se necessário
-                  // Chama a função verificarAprovacao com o ID do usuário logado
-                  verificarAprovacao(idusuario, materiaID);
-                }
-                else {
-                  console.log("jdfgbgffdigkdf")
-                }
-              });
-      </script>
+         document.addEventListener("DOMContentLoaded", async () => {
+           const usuarioLogadoJSON = localStorage.getItem('usuario');
+           const usuarioLogado = JSON.parse(usuarioLogadoJSON);
+           const idusuario = usuarioLogado.idusuario;
+           if (idusuario !== null) {
+             // O ID do usuário logado foi encontrado no armazenamento local
+             // Converte para o tipo apropriado, se necessário
+             // Chama a função verificarAprovacao com o ID do usuário logado
+             verificarAprovacao(idusuario, materiaID);
+           }
+           else {
+             console.log("jdfgbgffdigkdf")
+           }
+         });
+ </script>
+
+<div class="popup-container">
+  <div class="popup-box">
+    <h1>Você não pode realizar esta avaliação novamente. </h1>
+    <h2 id="score-text"></h2>
+  </div>
+</div>
     
         <nav>
 
@@ -134,14 +140,6 @@
         }
     </script>
 
-<div class="popup-container">
-  <div class="popup-box">
-    <h1>Você não pode realizar esta avaliação novamente. </h1>
-    <h2 id="score-text"></h2>
-  </div>
-</div>
-
-
     <div class="logout-container">
         <div class="logout-box">
             <button style="position: absolute; top: 0; right: 0; color: red; font-size: 3rem; margin-top: 5px; margin-right: 6px; cursor: pointer; background: none; border: none;" onclick="popupLogoutClose()">X</button>
@@ -162,7 +160,11 @@
         <a href="#">História</a>
     </div>
 
-    
+    <div class="popup-container">
+        <div class="popup-box">
+            <h1>Você não pode realizar esta avaliação.</h1>
+        </div>
+    </div>
     <div class="main-avaliacao">
     <div class="questoes-container">
       <div class="questao">
@@ -183,6 +185,7 @@
     <button class="btn-conclusao-prova" onclick="enviarRespostas()">Concluir avaliação</button>
   </div>
   
+
 
     </body>
     <script src="./js/avaliacao.js"></script>

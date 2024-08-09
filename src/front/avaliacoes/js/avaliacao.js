@@ -5,7 +5,8 @@ let respostasMarcadas = []; // Array para armazenar as respostas marcadas pelo u
 
 async function carregarQuestoes() {
   try {
-    const response = await fetch('http://localhost:3030/questao?materia=Gramática');
+    console.log(`Buscando questões para matéria ID: ${materiaID}`);
+    const response = await fetch(`http://localhost:3030/questao?materia_id=${materiaID}`);
     if (!response.ok) {
       throw new Error('Erro ao carregar as questões.');
     }
@@ -26,26 +27,26 @@ function atualizarQuestao(questoes, questaoIndex) {
   const enunciadoElement = document.getElementById("enunciado");
   const optionsElement = document.getElementById("options");
 
-  questaoNumeroElement.innerText = `Questão ${questaoIndex + 1}`;
+  questaoNumeroElement.innerText = `Questão ${questaoIndex + 1} - Enunciado`;
   enunciadoElement.innerText = questao.enunciado;
   optionsElement.innerHTML = ""; // Limpa as opções anteriores
 
-  questao.respostas.forEach((resposta, index) => {
+  questao.alternativas.forEach((resposta, index) => {
     const label = document.createElement("label");
     const input = document.createElement("input");
     const span = document.createElement("span");
 
     input.type = "radio";
-    input.name = `resposta-${questao.idquestao}`; // Usar um nome único para cada questão
-    input.value = resposta.idresposta;
+    input.name = `resposta-${questao.id}`; // Usar um nome único para cada questão
+    input.value = resposta.id;
 
     // Verificar se essa resposta está marcada
-    if (respostasMarcadas[questao.idquestao] === resposta.idresposta) {
+    if (respostasMarcadas[questao.id] === resposta.id) {
       input.checked = true;
     }
 
     // Adicionar a letra da alternativa antes do texto
-    span.innerText = `${letrasAlternativas[index]}) ${resposta.texto}`;
+    span.innerText = `${letrasAlternativas[index]}) ${resposta.alternativa}`;
 
     label.appendChild(input);
     label.appendChild(span);
@@ -53,7 +54,7 @@ function atualizarQuestao(questoes, questaoIndex) {
 
     // Adicionar evento para marcar a resposta selecionada
     input.addEventListener('change', () => {
-      marcarResposta(questao.idquestao, resposta.idresposta);
+      marcarResposta(questao.id, resposta.id);
     });
   });
 }
@@ -76,45 +77,16 @@ function proximaQuestao() {
   }
 }
 
-async function obterIdAvaliacao() {
-    try {
-      const resposta = await fetch('http://localhost:3030/questao?materia=Gramática');
-      if (!resposta.ok) {
-        throw new Error('Erro ao obter idavaliacao.');
-      }
-      const dados = await resposta.json();
-      
-      // Verifica se há questões retornadas e se a primeira questão tem idavaliacao
-      if (dados.length > 0 && dados[0].idavaliacao) {
-        return dados[0].idavaliacao;
-      } else {
-        throw new Error('ID de avaliação não encontrado.');
-      }
-    } catch (error) {
-      console.error('Erro ao obter idavaliacao:', error.message);
-      throw error;
-    }
-  }
-
 async function enviarRespostas() {
   try {
-    // Obtenha o usuário logado do localStorage
     const dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
-    const idusuario = dadosUsuario.idusuario;
-
-    // Obtenha o idavaliacao da página atual
-    const idavaliacao = await obterIdAvaliacao();
-    if (!idavaliacao) {
-      throw new Error('Não foi possível obter o ID de avaliação.');
+    if (!dadosUsuario || !dadosUsuario.idusuario) {
+      throw new Error('Dados do usuário não encontrados no localStorage.');
     }
-
-    // Obtenha as questões com idavaliacao da página atual
-    const questoes = await obterQuestoes();
-
-    // Prepara as respostas marcadas para envio ao backend
-    const respostasFormatadas = questoes.map((questao, index) => ({
-      idquestao: questao.idquestao,
-      idresposta: respostasMarcadas[questao.idquestao] || null // Caso não tenha resposta marcada, envia null
+    const idusuario = dadosUsuario.idusuario;
+    const respostasFormatadas = questoes.map((questao) => ({
+      idquestao: questao.id,
+      idresposta: respostasMarcadas[questao.id] || null // Caso não tenha resposta marcada, envia null
     }));
 
     // Envia as respostas para o backend
@@ -123,7 +95,7 @@ async function enviarRespostas() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ idusuario, idavaliacao, questoes: respostasFormatadas }),
+      body: JSON.stringify({ idusuario, materiaID, questoes: respostasFormatadas }),
     });
 
     if (respostaEnvio.ok) {
@@ -133,20 +105,6 @@ async function enviarRespostas() {
     }
   } catch (error) {
     console.error('Erro ao enviar respostas:', error.message);
-    throw error;
-  }
-}
-
-async function obterQuestoes() {
-  try {
-    const resposta = await fetch('http://localhost:3030/questao?materia=Gramática');
-    if (!resposta.ok) {
-      throw new Error('Erro ao obter questões.');
-    }
-    const dados = await resposta.json();
-    return dados;
-  } catch (error) {
-    console.error('Erro ao obter questões:', error.message);
     throw error;
   }
 }

@@ -1,42 +1,59 @@
-const { pool } = require("./bd.js");
+const { pool } = require('./bd'); // Ajuste o caminho se necessário
 
-async function listarQuestao(req, res) {
-  const { materia } = req.query; // Supondo que a matéria é passada como um parâmetro na query string
+// Função para listar questões e alternativas filtradas por matéria
+const listarQuestao = async (req, res) => {
+    const materiaId = parseInt(req.query.materia_id, 10); // Obtém o ID da matéria da query string
 
-  try {
-    const questoesQuery = `
-      SELECT q.idavaliacao, q.idquestao, q.enunciado, r.idresposta, r.texto, r.correta
-      FROM tbquestao q
-      JOIN tbresposta r ON q.idquestao = r.idquestao
-      WHERE q.materia = $1
-      ORDER BY q.idquestao`;
+    if (isNaN(materiaId)) {
+        return res.status(400).send('Parâmetro materia_id é necessário e deve ser um número');
+    }
 
-    const { rows: questoes } = await pool.query(questoesQuery, [materia]);
+    try {
+        // Consulta para obter questões com alternativas filtradas pela matéria
+        const result = await pool.query(`
+            SELECT q.id AS questao_id, q.enunciado, a.id AS resposta_id, a.alternativas, a.correta
+            FROM questoes q
+            LEFT JOIN respostas a ON q.id = a.questao_id
+            WHERE q.materia_id = $1
+            ORDER BY q.id, a.id
+        `, [materiaId]);
 
-    const questoesFormatadas = {};
+        // Organize os resultados em formato JSON
+        const questoes = result.rows.reduce((acc, row) => {
+            const { questao_id, enunciado, resposta_id, alternativas, correta } = row;
 
-    questoes.forEach(row => {
-      if (!questoesFormatadas[row.idquestao]) {
-        questoesFormatadas[row.idquestao] = {
-          idavaliacao: row.idavaliacao,
-          idquestao: row.idquestao,
-          enunciado: row.enunciado,
-          respostas: []
-        };
-      }
+            // Se a questão não está no acumulador, adicione-a
+            if (!acc[questao_id]) {
+                acc[questao_id] = {
+                    id: questao_id,
+                    enunciado: enunciado,
+                    alternativas: []
+                };
+            }
 
-      questoesFormatadas[row.idquestao].respostas.push({
-        idresposta: row.idresposta,
-        texto: row.texto,
-        correta: row.correta
-      });
-    });
+            // Adicione as alternativas à questão
+            if (resposta_id) {
+                acc[questao_id].alternativas.push({
+                    id: resposta_id,
+                    alternativa: alternativas,
+                    correta: correta
+                });
+            }
 
-    return res.json(Object.values(questoesFormatadas));
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Erro ao listar questões." });
-  }
-}
+            return acc;
+        }, {});
 
-module.exports = { listarQuestao };
+        // Converta o objeto de questões em um array
+        const questoesArray = Object.values(questoes);
+
+        // Envie a resposta como JSON
+        res.json(questoesArray);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Erro ao buscar questões e alternativas');
+    }
+};
+
+module.exports = {
+    listarQuestao,
+};

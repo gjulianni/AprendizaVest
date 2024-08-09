@@ -1,50 +1,182 @@
---Respostas das questões matéria Gramática
-insert into tbresposta(idquestao, texto, correta)
-values
-(1, 'conduzindo', false),
-(1, 'conduzido', true),
-(1, 'conduz', false),
-(1, 'conduziu', false),
-(2, 'essas', true),
-(2, 'estas', false),
-(2, 'esses', false),
-(2, 'esta', false),
-(3, 'Faz', true),
-(3, 'Fazem', false),
-(3, 'Fazia', false),
-(3, 'A', false),
-(4, 'avaliando', false),
-(4, 'avaliando-os', false),
-(4, 'avaliando-lhes', true),
-(4, 'avaliando-se', false),
-(5, 'Todos alunos chegou cedo para a prova', false),
-(5, 'Todos aluno chegaram cedo para a prova', false),
-(5, 'Todo aluno chegaram cedo para a prova', false),
-(5, 'Todos alunos chegaram cedo para a prova', true),
-(6, 'Adjunto adverbial', false),
-(6, 'Objeto direto', true),
-(6, 'Sujeito', false),
-(6, 'Objeto indireto', false),
-(7, 'Ele chegou tarde; portanto não participou da reunião.', false),
-(7, 'Ele chegou tarde, portanto não participou da reunião.', false),
-(7, 'Ele chegou tarde, portanto, não participou da reunião.', false),
-(7, 'Ele chegou tarde; portanto, não participou da reunião.', true),
-(8, 'O livro que estava na estante, estava empoeirado.', false),
-(8, 'O livro que estava na estante estava empoeirado.', false),
-(8, 'O livro, que estava na estante estava empoeirado.', false),
-(8, 'O livro, que estava na estante, estava empoeirado.', true),
-(9, 'Ele assistiu o filme no cinema.', false),
-(9, 'Ele assistiu com o filme no cinema.', false),
-(9, 'Ele assistiu ao filme no cinema.', true),
-(9, 'Ele assistiu de filme no cinema.', false),
-(10, 'Gostei muito do livro que você me indicou.', true),
-(10, 'Gostei muito pelo livro que você me indicou.', false),
-(10, 'Gostei muito com o livro que você me indicou.', false),
-(10, 'Gostei muito ao livro que você me indicou.', false)
+--Questões de Gramática
+INSERT INTO questoes (materia_id, enunciado) VALUES
+(1, 'Qual é o uso correto do pronome demonstrativo na frase "Aquela casa é bonita"?'),
+(1, 'Qual é a função do advérbio na frase "Ela fala muito bem"?'),
+(1, 'Qual é o papel da preposição na frase "Ele foi ao mercado"?'),
+(1, 'Qual é o erro de concordância na frase "Os alunos estuda muito"?'),
+(1, 'Identifique o pronome pessoal na frase "Nós vamos ao cinema"?'),
+(1, 'Qual é o verbo da frase "Ela canta bem"?'),
+(1, 'Qual é a função do adjetivo na frase "O carro vermelho está parado"?'),
+(1, 'Qual é o tipo de pronome na frase "Este livro é meu"?'),
+(1, 'Qual é o erro de colocação pronominal na frase "Ele me dá um presente"?'),
+(1, 'Qual é a diferença entre um pronome demonstrativo e um pronome possessivo?');
 
---Materias na tbavaliacao
-insert into tbavaliacao (idavaliacao, nome, descricao)
-values
-(1, 'Gramática', 'A avaliação de Gramática cobrirá todo o conteúdo do curso resumido em 10 questões.'),
-(2, 'Matemática', 'A avaliação de Matemática cobrirá todo o conteúdo do curso resumido em 10 questões.'),
-(3, 'Física', 'A avaliação de Física cobrirá todo o conteúdo do curso resumido em 10 questões.')
+--Respostas das questões de Gramática
+-- Questão 1
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(6, 'O pronome demonstra a localização da casa.', false),
+(6, 'O pronome substitui um substantivo.', false),
+(6, 'O pronome indica uma ação.', false),
+(6, 'O pronome descreve a casa.', true);
+
+-- Questão 2
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(7, 'O advérbio modifica um substantivo.', false),
+(7, 'O advérbio modifica um verbo.', true),
+(7, 'O advérbio indica tempo.', false),
+(7, 'O advérbio indica lugar.', false);
+
+-- Questão 3
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(8, 'A preposição indica um pronome.', false),
+(8, 'A preposição liga o verbo ao complemento.', true),
+(8, 'A preposição modifica um adjetivo.', false),
+(8, 'A preposição substitui um substantivo.', false);
+
+-- Questão 4
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(9, 'Concordância verbal.', true),
+(9, 'Concordância nominal.', false),
+(9, 'Concordância adjetiva.', false),
+(9, 'Concordância adverbial.', false);
+
+-- Questão 5
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(10, 'Nós', true),
+(10, 'Vamos', false),
+(10, 'Ao', false),
+(10, 'Cinema', false);
+
+-- Questão 6
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(11, 'Ela', false),
+(11, 'Canta', true),
+(11, 'Bem', false),
+(11, 'Frase', false);
+
+-- Questão 7
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(12, 'O adjetivo modifica o verbo.', false),
+(12, 'O adjetivo modifica o advérbio.', false),
+(12, 'O adjetivo modifica o substantivo.', true),
+(12, 'O adjetivo indica um pronome.', false);
+
+-- Questão 8
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(13, 'Pronome demonstrativo.', true),
+(13, 'Pronome possessivo.', false),
+(13, 'Pronome pessoal.', false),
+(13, 'Pronome indefinido.', false);
+
+-- Questão 9
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(14, 'Colocação pronominal correta.', false),
+(14, 'Colocação pronominal incorreta.', true),
+(14, 'Colocação adjetiva correta.', false),
+(14, 'Colocação adverbial correta.', false);
+
+-- Questão 10
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(15, 'Pronome demonstrativo indica localização e pronome possessivo indica posse.', true),
+(15, 'Pronome demonstrativo indica tempo e pronome possessivo indica ação.', false),
+(15, 'Pronome demonstrativo indica quantidade e pronome possessivo indica comparação.', false),
+(15, 'Pronome demonstrativo indica qualidade e pronome possessivo indica lugar.', false);
+
+
+
+
+
+
+
+--Questões Matemática
+
+-- Geometria
+INSERT INTO questoes (materia_id, enunciado) VALUES
+(2, 'Calcule o volume de uma esfera com raio de 7 cm. Utilize a fórmula V = 4/3 * π * r³.'),
+(2, 'Determine o comprimento da diagonal de um cubo com aresta de 5 cm.');
+
+-- Polinômios
+INSERT INTO questoes (materia_id, enunciado) VALUES
+(2, 'Resolva o polinômio x³ - 6x² + 11x - 6 = 0 usando o método de fatoração.'),
+(2, 'Qual é a raiz do polinômio 2x^4 - 5x^2 + 3 = 0 utilizando substituições?');
+
+-- Equações do Segundo Grau
+INSERT INTO questoes (materia_id, enunciado) VALUES
+(2, 'Encontre as raízes da equação 2x^2 - 3x - 2 = 0 utilizando a fórmula quadrática.'),
+(2, 'Determine as raízes da equação x^2 - 4x + 4 = 0.');
+
+-- Plano Cartesiano
+INSERT INTO questoes (materia_id, enunciado) VALUES
+(2, 'Encontre a distância entre os pontos (-3, 4) e (5, -2) no plano cartesiano. Utilize a fórmula da distância.'); 
+
+-- Trigonometria
+INSERT INTO questoes (materia_id, enunciado) VALUES
+(2, 'Calcule o valor de tan(45°) e explique sua relação com a tangente no triângulo retângulo.');
+
+-- Cálculos com Raízes
+INSERT INTO questoes (materia_id, enunciado) VALUES
+(2, 'Resolva a equação √(2x + 3) - 4 = 0 e determine o valor de x.'),
+(2, 'Encontre o valor de x na equação 3√x = 12.');
+
+--Respostas avaliação Matemática
+-- Geometria
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(26, 'V = 4/3 * π * 7³ ≈ 1436.76 cm³', true),
+(26, 'V = 4/3 * π * 7² ≈ 615.75 cm³', false),
+(26, 'V = 4/3 * π * 7² ≈ 1539.38 cm³', false),
+(26, 'V = 4/3 * π * 7² ≈ 1800.54 cm³', false),
+
+(27, 'Diagonal = 5√3 cm', true),
+(27, 'Diagonal = 10 cm', false),
+(27, 'Diagonal = 5√2 cm', false),
+(27, 'Diagonal = 5√6 cm', false);
+
+-- Polinômios
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(28, 'Raízes: x = 1, x = 2, x = 3', true),
+(28, 'Raízes: x = -1, x = 2, x = 3', false),
+(28, 'Raízes: x = 1, x = -2, x = 3', false),
+(28, 'Raízes: x = 1, x = 2, x = -3', false),
+
+(29, 'Raízes: x = ±√(5/2), x = ±√(3/2)', true),
+(29, 'Raízes: x = ±√5, x = ±√3', false),
+(29, 'Raízes: x = ±√2, x = ±√3', false),
+(29, 'Raízes: x = ±√2, x = ±√5', false);
+
+-- Equações do Segundo Grau
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(30, 'Raízes: x = 2 e x = -0.5', true),
+(30, 'Raízes: x = 1.5 e x = -1', false),
+(30, 'Raízes: x = 3 e x = -1', false),
+(30, 'Raízes: x = 2.5 e x = -1', false),
+
+(31, 'Raízes: x = 2 (dupla)', true),
+(31, 'Raízes: x = 1 e x = 3', false),
+(31, 'Raízes: x = -2 e x = -1', false),
+(31, 'Raízes: x = 1 e x = -4', false);
+
+-- Plano Cartesiano
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(32, 'Distância ≈ 10 cm', true),
+(32, 'Distância ≈ 7.8 cm', false),
+(32, 'Distância ≈ 9.6 cm', false),
+(32, 'Distância ≈ 12.3 cm', false);
+
+-- Trigonometria
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(33, 'tan(45°) = 1', true),
+(33, 'tan(45°) = 0', false),
+(33, 'tan(45°) = √2', false),
+(33, 'tan(45°) = 2', false);
+
+-- Cálculos com Raízes
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+(34, 'x = 4', true),
+(34, 'x = 2', false),
+(34, 'x = 1', false),
+(34, 'x = 6', false),
+
+(35, 'x = 16', true),
+(35, 'x = 4', false),
+(35, 'x = 12', false),
+(35, 'x = 8', false);
