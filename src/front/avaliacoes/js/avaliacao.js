@@ -13,6 +13,7 @@ async function carregarQuestoes() {
     questoes = await response.json();
     if (questoes.length > 0) {
       atualizarQuestao(questoes, questaoAtual);
+      verificarRespostasMarcadas();
     } else {
       console.error('Nenhuma questão encontrada.');
     }
@@ -61,12 +62,29 @@ function atualizarQuestao(questoes, questaoIndex) {
 
 function marcarResposta(idQuestao, idResposta) {
   respostasMarcadas[idQuestao] = idResposta; // Armazenar a resposta marcada
+  verificarRespostasMarcadas(); // Verifica se todas as respostas foram marcadas
+}
+
+function verificarRespostasMarcadas() {
+  const todasRespostasMarcadas = questoes.every((questao) => respostasMarcadas[questao.id]);
+  const botaoConclusao = document.querySelector('.btn-conclusao-prova');
+
+  if (!todasRespostasMarcadas) {
+    botaoConclusao.style.cursor = 'not-allowed';
+    botaoConclusao.disabled = true;
+    botaoConclusao.style.backgroundColor = '#303030'
+
+  } else {
+    botaoConclusao.style.cursor = 'pointer';
+    botaoConclusao.disabled = false;
+  }
 }
 
 function questaoAnterior() {
   if (questaoAtual > 0) {
     questaoAtual--;
     atualizarQuestao(questoes, questaoAtual);
+    verificarRespostasMarcadas();
   }
 }
 
@@ -74,6 +92,7 @@ function proximaQuestao() {
   if (questaoAtual < questoes.length - 1) {
     questaoAtual++;
     atualizarQuestao(questoes, questaoAtual);
+    verificarRespostasMarcadas();
   }
 }
 
@@ -86,7 +105,7 @@ async function enviarRespostas() {
     const idusuario = dadosUsuario.idusuario;
     const respostasFormatadas = questoes.map((questao) => ({
       idquestao: questao.id,
-      idresposta: respostasMarcadas[questao.id] || null // Caso não tenha resposta marcada, envia null
+      idresposta: respostasMarcadas[questao.id] 
     }));
 
     // Envia as respostas para o backend
@@ -99,6 +118,7 @@ async function enviarRespostas() {
     });
 
     if (respostaEnvio.ok) {
+      window.location.href = '../index.html'
       console.log('Respostas enviadas com sucesso.');
     } else {
       throw new Error('Erro ao enviar respostas.');

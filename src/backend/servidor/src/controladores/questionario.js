@@ -45,20 +45,6 @@ async function listarQuestionario(req, res) {
 }
 
 
-/*
-Padrão de requisição para cadastrar um questionário
-{
-  "idusuario":1,
-  "questoes": [
-    {"idquestao":2,"resposta":false},
-    {"idquestao":5,"resposta":true},
-    {"idquestao":10,"resposta":true},
-    {"idquestao":15,"resposta":false}
-  ]
-}
-*/
-
-
 
 async function salvarQuestionario(req, res) {
   const { idusuario, materiaID, questoes } = req.body;
@@ -146,7 +132,7 @@ async function verificarAprovacao(idusuario, materiaID) {
 
     const idQuestionario = resposta.rows[0].id;
 
-      // Agora, obtenha as respostas associadas a esse questionário
+      // Clausula Select para pegar as questoes e as respostas marcadas pelo usuario durante a avaliacao
       
       const respostasQuestoes = await pool.query(
         `SELECT q.enunciado, r.alternativas AS resposta_selecionada

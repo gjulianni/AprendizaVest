@@ -46,10 +46,10 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
 
-
+            
           if (isUserLoggedIn()) {
             console.log("Usuário está logado");
-            const btnLogout = document.getElementsByClassName('btn-logout')[0];
+            const btnLogout = document.getElementsByClassName('btn-logout')[0]; 
             btnLogout.style.display = "flex";
           
             const btnLogin = document.getElementsByClassName('btn-logon')[0];
@@ -58,7 +58,7 @@
             const botoesConteudo = document.querySelectorAll('.btn-lp, .btn-mat, .btn-fis, .btn-qui, .btn-bio, .btn-geo, .btn-hist');
             botoesConteudo.forEach(btn => {
             btn.addEventListener('click', function() {
-            // Redirecionando para a página desejada quando o botão é clicado
+
             window.location.href = "./aulas.html";
         });
     });
@@ -147,10 +147,31 @@ console.log("Usuário não está logado");
             <li id="pagina-aulas"><a href="aulas.html">Aulas</a></li>
             <li id="pagina-simulados"><a href="#">Avaliações</a></li>
             <li><a href="#">Certificados</a></li>
+            <li id="perfil"><a href="perfil.html">Meu Perfil</a></li>
+            <li id="logout" onclick="logout()">Sair</li>
+            
         </ul>
 
         <a href="./login.html"><button class="btn-logon">Login</button></a>
-        <button class="btn-logout" onclick="popupLogout()">Sair</button>
+        
+        <button class="btn-perfil" onclick="openProfilePreview()">Meu Perfil</button>
+        <div class="nav-perfil">
+           <p onclick="closeProfilePreview()" style="color: red; font-size: 1.4rem; position: absolute; top: 0; right: 0; margin-top: 5px; margin-right: 5px; cursor: pointer;">X</p>
+            <div class="profile-image">
+                <img id="profilePic" src="./images/profileDefault/pdefault.png" alt="Imagem do seu Perfil" style="width: 45px; height: 43px; margin-top: 10px; margin-right: 10px;">
+            </div>
+            <div class="profile-infos">
+                <h2 id="profile-name" style="font-size: 1.5rem; margin-left: 10px; margin-top: 5px; margin-bottom: 2px;"></h2>
+                <p id="profile-email" style="font-size: 1rem; color: #8d8d8d; margin-top: 0; font-weight: 500; margin-left: 12px;">email@teste.com</p>
+                <p id="profile-datecreated" style="font-size: 1rem; color: #8d8d8d; margin-top: 0; font-weight: 500; margin-left: 12px;"></p>
+            </div>
+            
+            <div class="profile-buttons">
+                <button id="detailed-profile">Perfil Completo</button>
+                <button class="btn-logout" onclick="popupLogout()">Sair</button>
+            </div>
+    </div>
+        
     </nav>
 
     <script>
@@ -166,6 +187,34 @@ console.log("Usuário não está logado");
             popupLogout1.style.display = "none";
         }
     </script>
+
+<script>
+           
+    let profileNav;
+    function openProfilePreview() {
+        profileNav = document.querySelector('.nav-perfil');
+        profileNav.style.display = 'flex';
+    }
+    function closeProfilePreview() {
+        profileNav.style.display = 'none';
+    }
+        const userLoggedJSON = localStorage.getItem('usuario');
+        const userLogged = JSON.parse(userLoggedJSON);
+        const nomeUsuario = userLogged.nome;
+        const emailUsuario = userLogged.mail;
+
+        const dataCriacao = userLogged.datacriacao;
+
+        const dataFormatada = new Date(dataCriacao).toLocaleString('pt-BR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'    
+      });
+
+        document.getElementById('profile-name').innerText = nomeUsuario;
+        document.getElementById('profile-email').innerText = emailUsuario;
+        document.getElementById('profile-datecreated').innerText = `Membro desde: ${dataFormatada}`;
+</script>
 
 
 <div id="dialogBox" class="dialog-box">

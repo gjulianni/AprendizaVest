@@ -180,3 +180,94 @@ INSERT INTO respostas (questao_id, alternativas, correta) VALUES
 (35, 'x = 4', false),
 (35, 'x = 12', false),
 (35, 'x = 8', false);
+
+
+
+
+
+
+--Questões de Física
+
+INSERT INTO questoes (materia_id, enunciado) VALUES
+-- Termodinâmica
+
+(3, 'Um gás ideal sofre uma expansão isotérmica, dobrando seu volume. Qual a razão entre a pressão final e a pressão inicial do gás?'),
+(3, 'Durante um processo adiabático, a energia interna de um gás diminui em 150 J. Qual a quantidade de calor trocada com o ambiente?'),
+
+-- Segunda Lei de Ohm
+
+(3, 'Um fio metálico de 2 metros de comprimento, com seção transversal de 0,5 mm² e resistividade de 1,7 x 10^-8 Ω·m, é conectado a uma fonte de 10 V. Qual a corrente que percorre o fio?'),
+
+-- Magnetismo
+
+(3, 'Um elétron se move perpendicularmente a um campo magnético uniforme de 0,2 T com uma velocidade de 3 x 10^6 m/s. Qual a força magnética exercida sobre o elétron?'),
+(3, 'Dois fios paralelos, separados por uma distância de 2 cm, carregam correntes de 5 A em direções opostas. Qual a força por unidade de comprimento entre eles?'),
+-- Ondulatória
+
+(3, 'Uma onda senoidal em uma corda tem uma frequência de 60 Hz e um comprimento de onda de 2 metros. Qual é a velocidade de propagação da onda?'),
+(3, 'Uma onda em uma corda tem uma amplitude de 5 cm e uma energia associada de 50 J. Se a amplitude da onda for dobrada, qual será a nova energia?'),
+(3, 'Uma onda sonora se propaga no ar com uma frequência de 500 Hz e um comprimento de onda de 0,68 m. Qual é a velocidade do som neste meio?'),
+-- Energia
+	
+(3, 'Um bloco de 10 kg é levantado a uma altura de 5 metros. Qual a energia potencial gravitacional do bloco em relação ao solo?'),
+(3, 'Um carro de 1200 kg viaja a uma velocidade de 20 m/s. Qual é a energia cinética do carro?');
+
+
+
+--Respostas da avaliação de Física
+
+INSERT INTO respostas (questao_id, alternativas, correta) VALUES
+-- Termodinâmica
+(36, 'A pressão final é igual à pressão inicial.', false),
+(36, 'A pressão final é metade da pressão inicial.', true),
+(36, 'A pressão final é o dobro da pressão inicial.', false),
+(36, 'A pressão final é quatro vezes a pressão inicial.', false),
+
+(37, '150 J de calor foi absorvido pelo gás.', false),
+(37, '150 J de calor foi liberado pelo gás.', false),
+(37, 'Nenhuma troca de calor ocorreu.', true),
+(37, 'O gás liberou 75 J de calor.', false),
+
+-- Segunda Lei de Ohm
+(38, 'A corrente é de 10 A.', false),
+(38, 'A corrente é de 5 A.', false),
+(38, 'A corrente é de 2 A.', false),
+(38, 'A corrente é de 1 A.', true),
+
+-- Magnetismo
+(39, 'A força magnética é de 1,6 x 10^-13 N.', true),
+(39, 'A força magnética é de 3,2 x 10^-13 N.', false),
+(39, 'A força magnética é de 4,8 x 10^-13 N.', false),
+(39, 'A força magnética é de 6,4 x 10^-13 N.', false),
+
+(40, 'A força por unidade de comprimento é de 2 x 10^-5 N/m.', true),
+(40, 'A força por unidade de comprimento é de 1 x 10^-5 N/m.', false),
+(40, 'A força por unidade de comprimento é de 4 x 10^-5 N/m.', false),
+(40, 'A força por unidade de comprimento é de 8 x 10^-5 N/m.', false),
+
+-- Ondulatória
+(41, 'A velocidade de propagação é de 120 m/s.', true),
+(41, 'A velocidade de propagação é de 60 m/s.', false),
+(41, 'A velocidade de propagação é de 180 m/s.', false),
+(41, 'A velocidade de propagação é de 30 m/s.', false),
+
+(42, 'A nova energia será de 200 J.', true),
+(42, 'A nova energia será de 100 J.', false),
+(42, 'A nova energia será de 50 J.', false),
+(42, 'A nova energia será de 400 J.', false),
+
+(43, 'A velocidade do som é de 340 m/s.', true),
+(43, 'A velocidade do som é de 500 m/s.', false),
+(43, 'A velocidade do som é de 250 m/s.', false),
+(43, 'A velocidade do som é de 400 m/s.', false),
+
+-- Energia
+(44, 'A energia potencial gravitacional é de 500 J.', true),
+(44, 'A energia potencial gravitacional é de 50 J.', false),
+(44, 'A energia potencial gravitacional é de 100 J.', false),
+(44, 'A energia potencial gravitacional é de 250 J.', false),
+
+(45, 'A energia cinética é de 240 kJ.', true),
+(45, 'A energia cinética é de 120 kJ.', false),
+(45, 'A energia cinética é de 480 kJ.', false),
+(45, 'A energia cinética é de 360 kJ.', false);

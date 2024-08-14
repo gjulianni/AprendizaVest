@@ -90,9 +90,6 @@
            const usuarioLogado = JSON.parse(usuarioLogadoJSON);
            const idusuario = usuarioLogado.idusuario;
            if (idusuario !== null) {
-             // O ID do usuário logado foi encontrado no armazenamento local
-             // Converte para o tipo apropriado, se necessário
-             // Chama a função verificarAprovacao com o ID do usuário logado
              verificarAprovacao(idusuario, materiaID);
            }
            else {

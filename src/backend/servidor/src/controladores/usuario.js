@@ -13,7 +13,7 @@ async function cadastrarUsuario(req, res) {
   } else {
     // Antes de criar um novo usuário, confere se o e-mail já existe
     let resposta = await pool.query(
-      "SELECT idusuario,mail,nome,senha FROM tbusuario WHERE mail=$1 LIMIT 1",
+      "SELECT idusuario, mail, nome, senha, datacriacao FROM tbusuario WHERE mail=$1 LIMIT 1",
       [mail]
     );
     // Verifica se o usuário existe na tbusuario
@@ -23,7 +23,7 @@ async function cadastrarUsuario(req, res) {
     } else {
       // Insere um registro na tbusuario
       resposta = await pool.query(
-        "INSERT INTO tbusuario(mail,nome,senha) VALUES ($1,$2,$3) RETURNING idusuario, mail, nome, senha",
+        "INSERT INTO tbusuario(mail, nome, senha, datacriacao) VALUES ($1, $2, $3, DEFAULT) RETURNING idusuario, mail, nome, senha, datacriacao",
         [mail, nome, senha]
       );
       // Retorna o registro inserido no formato JSON

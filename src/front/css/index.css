@@ -150,12 +150,71 @@ ul li:hover::after{
     overflow: hidden;
     text-align: center;
     border: none;
+    display: none;
+  }
+
+
+  .btn-perfil {
+    background: white;
+    border-radius: 20px;
+    padding: 15px 25px;
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
+    border: none;
+    transition: 0.5s;
     position: absolute;
     right: 0;
     top: 0;
     margin-top: 15px;
     margin-right: 20px;
+  }
+
+  .btn-perfil:hover {
+    color: #fff;
+    background: black;
+  }
+
+  .nav-perfil {
+
     display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px;
+    padding-top: 10px;
+    height: 150px;
+    color: black;
+    justify-content: center;
+  }
+  
+  .profile-buttons {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  #detailed-profile {
+    background: rgb(2, 118, 172);
+    border-radius: 20px;
+    padding: 15px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
+    border: none;
   }
 
   .btn-logout:hover {
@@ -168,6 +227,31 @@ ul li:hover::after{
     background: black;
     color: white;
   }
+  #logout {
+
+    display: none;
+    color: red;
+
+  }
+  #perfil {
+    display: none;
+  }
+
+  #logout::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #f80808;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    transition: 0.4s;
+}
+
+  #logout:hover::after {
+    width: 100%;
+  }
+  
   
   @media (max-width: 1200px) {
 
@@ -192,13 +276,24 @@ ul li:hover::after{
 
         margin-right: 90px;
     }
+
+    .btn-logout {
+      margin-right: 70px;
+    }
+
+    #logout {
+      display: flex;
+    }
+    #perfil {
+      display: flex;
+    }
   
     ul {
       position: fixed;
       top: 80px;
       right: -100%;
       background-color: #1e89cf;
-      width: 40%;
+      width: 60%;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -241,6 +336,8 @@ ul li:hover::after{
         font-size: 1.5rem;
     }
   }
+
+  
 
   .logout-container {
 

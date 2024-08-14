@@ -1,4 +1,4 @@
-const { pool } = require('./bd'); // Ajuste o caminho se necessário
+const { pool } = require('./bd'); 
 
 // Função para listar questões e alternativas filtradas por matéria
 const listarQuestao = async (req, res) => {
@@ -22,7 +22,7 @@ const listarQuestao = async (req, res) => {
         const questoes = result.rows.reduce((acc, row) => {
             const { questao_id, enunciado, resposta_id, alternativas, correta } = row;
 
-            // Se a questão não está no acumulador, adicione-a
+         
             if (!acc[questao_id]) {
                 acc[questao_id] = {
                     id: questao_id,
@@ -43,10 +43,8 @@ const listarQuestao = async (req, res) => {
             return acc;
         }, {});
 
-        // Converta o objeto de questões em um array
         const questoesArray = Object.values(questoes);
 
-        // Envie a resposta como JSON
         res.json(questoesArray);
     } catch (err) {
         console.error(err);

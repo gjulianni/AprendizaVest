@@ -3,6 +3,7 @@ CREATE TABLE tbusuario (
   nome VARCHAR(100) NOT NULL,
   mail VARCHAR(100) NOT NULL,
   senha VARCHAR(100) NOT NULL,
+  datacriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   PRIMARY KEY(idusuario),
   UNIQUE(mail)
 );
